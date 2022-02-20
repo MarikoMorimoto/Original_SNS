@@ -18,7 +18,7 @@ use App\Http\Controllers\LikeController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();

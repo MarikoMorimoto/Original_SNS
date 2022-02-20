@@ -58,6 +58,9 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
+                                <li class="nav-item"><a href="{{ route('posts.index') }}" class="nav-link"><i class="fas fas fa-seedling"> 投稿一覧</i></a></li>
+                                <li class="nav-item"><a href="#" class="nav-link"><i class="fas fas fa-seedling"> 投稿一覧</i></a></li>
+                                <li class="nav-item"><a href="#" class="nav-link"><i class="fas fas fa-seedling"> 投稿一覧</i></a></li>                            
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
