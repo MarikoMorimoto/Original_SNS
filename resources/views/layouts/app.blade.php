@@ -10,7 +10,13 @@
     <title>{{ config('app.name', 'Flowers') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    {{-- Bootstrap4 を使用するために無効化 --}}
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
+    
+    {{-- Bootstrap4 を使用するために追加 --}}
+    <!-- jQuery first, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,22 +24,28 @@
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- Bootstrap4 を使用するために無効化 --}}
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+    
+    {{-- Bootstrap4 を使用するために追加 --}}
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Original CSS -->
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="apple-touch-icon" type="image/png" href="apple-touch-icon-180x180.png">
-    <link rel="icon" type="image/png" href="icon-192x192.png">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" type="image/png" href="{{ asset('apple-touch-icon-180x180.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('icon-192x192.png') }}">
     
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="images/logo.png" alt="logo">
+                    <img src="{{ asset('images/logo.png') }}" alt="logo">
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -44,7 +56,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav my-1 text-center ml-auto">
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -63,7 +75,7 @@
                                 <li class="nav-item"><a href="#" class="nav-link"><i class="fas fas fa-seedling"> 投稿一覧</i></a></li>                            
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} さんのマイページ
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
