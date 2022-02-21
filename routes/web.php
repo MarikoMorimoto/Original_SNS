@@ -22,7 +22,22 @@ Route::get('/', function () {
     return view('home');
 });
 
-Auth::routes();
+// Auth::routes();
+// メール認証機能追加のため書き換え
+Auth::routes(['verify' => true]);
+
+Route::middleware(['verified'])->group(function(){
+    // メール確認済みのverifiedユーザー以外は
+    // ここに記載した各ルートにアクセスできなくなる
+});
+
+Route::get('/register/after', function () {
+    return view('auth.after_register');
+});
+
+Route::get('logout/after', function () {
+    return view('auth.after_logout');
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -33,7 +48,7 @@ Route::resource('likes', LikeController::class)->only([
 ]);
 
 // 非同期でのいいねデータ追加用ルート
-Route::post('/ajax/likes', 'LikeController@ajaxLikes')->name('ajax.likes');
+Route::post('/likes/ajax', [App\Http\Controllers\LikeController::class, 'ajaxLikes'])->name('likes.ajax');
 
 Route::resource('about', AboutController::class)->only([
     'index'
