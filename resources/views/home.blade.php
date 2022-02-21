@@ -34,26 +34,23 @@
         </div>
     </div>
 </div>
+<!-- セッションにフラッシュメッセージがセットされている時だけ表示 -->
+@if (session('status'))
 <div class="container mt-3">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
-
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <!-- {{ __('You are logged in!') }} -->
-                    こんにちは！
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endif
 <!-- 検索フォーム -->
 <section class="container">
     <form class="form-inline my-3 justify-content-lg-left justify-content-center">
