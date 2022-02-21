@@ -70,24 +70,24 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
+                                <li class="nav-item"><a href="{{ route('about.index') }}" class="nav-link"><i class="fas fas fa-seedling"> このサイトについて</i></a></li>
                                 <li class="nav-item"><a href="{{ route('posts.index') }}" class="nav-link"><i class="fas fas fa-seedling"> 投稿一覧</i></a></li>
-                                <li class="nav-item"><a href="#" class="nav-link"><i class="fas fas fa-seedling"> 投稿一覧</i></a></li>
                                 <li class="nav-item"><a href="#" class="nav-link"><i class="fas fas fa-seedling"> 投稿一覧</i></a></li>                            
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} さんのマイページ
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a href="#" class="dropdown-item">mypage1</a>
-                                    <a href="#" class="dropdown-item">mypage2</a>
-                                    <a href="#" class="dropdown-item">mypage3</a>
-                                </div>
-                            </li>
-                            <li class="nav-item"><a href="{{ route('posts.index') }}" class="nav-link"><i class="fas fas fa-seedling"> 投稿一覧</i></a></li>
-                            <li class="nav-item"><a href="#" class="nav-link"><i class="fas fas fa-seedling"> 投稿一覧</i></a></li>
-                            <li class="nav-item"><a href="#" class="nav-link"><i class="fas fas fa-seedling"> 投稿一覧</i></a></li>
-                            <li class="nav-item">
+                        <li class="nav-item"><a href="{{ route('about.index') }}" class="nav-link"><i class="fas fas fa-seedling"> このサイトについて</i></a></li>
+                        <li class="nav-item"><a href="{{ route('posts.index') }}" class="nav-link"><i class="fas fas fa-seedling"> 投稿一覧</i></a></li>
+                        <li class="nav-item"><a href="#" class="nav-link"><i class="fas fas fa-seedling"> 投稿一覧</i></a></li>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }} さんのマイページ
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a href="#" class="dropdown-item">mypage1</a>
+                                <a href="#" class="dropdown-item">mypage2</a>
+                                <a href="#" class="dropdown-item">mypage3</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
                                 <a href="{{ route('logout') }}"
                                     class="nav-link"
                                     onclick="event.preventDefault();

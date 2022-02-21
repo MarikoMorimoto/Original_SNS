@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>仮ページ</h1>
+    <h2>仮ページ</h2>
 </div>
 
 @endsection

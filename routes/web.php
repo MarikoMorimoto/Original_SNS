@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 // use でコントローラを呼び出し、アクション構文でルーティングを記載
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\AboutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,7 @@ Route::resource('likes', LikeController::class)->only([
 
 // 非同期でのいいねデータ追加用ルート
 Route::post('/ajax/likes', 'LikeController@ajaxLikes')->name('ajax.likes');
+
+Route::resource('about', AboutController::class)->only([
+    'index'
+]);
