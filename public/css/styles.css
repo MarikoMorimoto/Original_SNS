@@ -13,6 +13,16 @@ h2 {
     color: #555555;
     padding-bottom: 0.5rem;
     margin-top: 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
     border-bottom: solid 1.5px #666666;
+}
+
+.list-group-item {
+    border: dashed 1px #777777;
+}
+.list-group > a:first-child {
+    border-top: none;
+}
+.list-group > a:last-child {
+    border-bottom: none;
 }
