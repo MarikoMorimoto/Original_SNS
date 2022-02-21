@@ -33,6 +33,12 @@ class LoginController extends Controller
         return '/home';
     }
 
+    protected function loggedOut(\Illuminate\Http\Request $request)
+    {
+        session()->flash('status', 'ログアウトしました。');
+        return redirect('/home');
+    }
+
     /**
      * Create a new controller instance.
      *
