@@ -35,8 +35,7 @@ class LoginController extends Controller
 
     protected function loggedOut(\Illuminate\Http\Request $request)
     {
-        session()->flash('status', 'ログアウトしました。');
-        return redirect('/home');
+        return view('auth.after_logout');
     }
 
     /**
