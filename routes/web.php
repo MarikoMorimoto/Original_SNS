@@ -29,6 +29,10 @@ Auth::routes(['verify' => true]);
 Route::middleware(['verified'])->group(function(){
     // メール確認済みのverifiedユーザー以外は
     // ここに記載した各ルートにアクセスできなくなる
+    Route::resource('about', AboutController::class)->only([
+        'index'
+    ]);
+
 });
 
 Route::get('/register/after', function () {
@@ -49,7 +53,3 @@ Route::resource('likes', LikeController::class)->only([
 
 // 非同期でのいいねデータ追加用ルート
 Route::post('/likes/ajax', [App\Http\Controllers\LikeController::class, 'ajaxLikes'])->name('likes.ajax');
-
-Route::resource('about', AboutController::class)->only([
-    'index'
-]);

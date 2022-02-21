@@ -14,10 +14,11 @@
                         </div>
                     @endif
 
-                    {{ __('もし確認用メールが見当たらない場合は、下記をクリックしてください。') }},
+                    {{ __('このページにアクセスするには、ユーザー登録時にお送りしたメールでの認証が必要です。もし認証メールが見当たらない場合は、下記をクリックしてください。') }}
+                    <br>
                     <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                         @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('確認メールを再送信する') }}</button>.
+                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('確認メールを再送信する') }}</button>
                     </form>
                 </div>
             </div>
