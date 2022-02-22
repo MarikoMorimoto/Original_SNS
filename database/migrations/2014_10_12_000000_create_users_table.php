@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             // Laravel6 の $table->bigIncrements(); と Laravel8 の $table->id(); は同義
             $table->id();
-            $table->string('name');
+            $table->string('name', 20);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

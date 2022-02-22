@@ -16,7 +16,7 @@ class CreateCategoriesTable extends Migration
         // カテゴリのレコードについては Seeder で作成
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name', 20);
             $table->timestamps();
         });
     }

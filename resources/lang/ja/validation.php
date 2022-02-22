@@ -129,11 +129,15 @@ return [
     'url'                  => ':attributeは、有効なURL形式で指定してください。',
     'uuid'                 => ':attributeは、有効なUUIDでなければなりません。',
     'custom'               => [
-        'attributes' => [
+        'attribute-name' => [
             'rule-name' => 'custom-message',
             'name' => '名前',
             'email' => 'メールアドレス',
-            'password' => 'パスワード'
+            'password' => 'パスワード',
+            'title' => 'タイトル',
+            'comment' => 'コメント',
+            'category_id' => 'カテゴリ',
+            'image' => '画像'
         ],
     ],
 ];
