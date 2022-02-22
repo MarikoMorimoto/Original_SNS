@@ -14,11 +14,15 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
+            // Laravel6 の $table->bigIncrements(); と Laravel8 の $table->id(); は同義
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            // nullable() でプロフィール作成時に無記入を許可
+            $table->string('profile')->nullable()->default('');
+            $table->string('image')->default('');
             $table->rememberToken();
             $table->timestamps();
         });
