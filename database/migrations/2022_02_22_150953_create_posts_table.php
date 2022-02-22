@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             // foreignId メソッドは bigIncrements で設定されるデータ型 unsignedBigInteger カラムを作成する
             // foreignIdメソッドとconstrainedメソッド を用いれば外部キー制約を設定できる
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('title');
+            $table->string('title', 20);
             $table->string('comment', 150);
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->string('image', 100);

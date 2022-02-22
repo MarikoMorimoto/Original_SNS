@@ -38,7 +38,7 @@ class CategorySeeder extends Seeder
             [
                 'id' => 6,
                 'name' => 'その他',
-            ]
+            ],
         ];
 
         foreach ($categories as $category) {
