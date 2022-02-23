@@ -15,7 +15,9 @@
                     @endif
 
                     {{ 'またのご利用をお待ちしております!' }}
-                    <a class="btn btn-light btn-outline-secondary w-100 my-4" href="{{ route('home') }}">トップページに移動</a>
+                    <div class="row justify-content-center">
+                        <a class="btn btn-light btn-outline-secondary col-md-8 my-4" href="{{ route('home') }}">トップページに移動</a>
+                    </div>
                 </div>
             </div>
         </div>
