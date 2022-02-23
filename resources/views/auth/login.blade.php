@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-9 offset-md-3">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
@@ -52,16 +52,22 @@
                         </div>
 
                         <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
+                            <div class="col-md-12 text-right">
                                 <button type="submit" class="btn btn-light btn-outline-secondary">
                                     {{ __('Login') }}
                                 </button>
-
+                            </div>
+                            <div class="col-md-12 text-right mt-3">
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                        {{ 'パスワードをお忘れの場合はこちら' }}
                                     </a>
                                 @endif
+                            </div>
+                            <div class="col-md-12 text-right">
+                                <a class="btn btn-link" href="{{ route('register') }}">
+                                    {{ '登録がお済みでない方はこちら' }}
+                                </a>
                             </div>
                         </div>
                     </form>
