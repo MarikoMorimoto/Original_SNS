@@ -101,10 +101,12 @@
         $('.now_count_comment').text(count);
         if (count > 150) {
             $('.now_count_comment').addClass('text-danger');
-            $('.over_count_comment').text('コメントの入力は150文字以下にしてください').addDlass('text-danger');
+            $('.over_count_comment').text('コメントの入力は150文字以下にしてください').addClass('text-danger');
+            $('.submit').prop('disabled', true);
         } else {
             $('.now_count_comment').removeClass('text-danger');
             $('.over_count_comment').empty();
+            $('.submit').prop('disabled', false);
         }
     });
 
