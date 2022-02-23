@@ -82,7 +82,7 @@
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }} さんのマイページ
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
                                 <a href="#" class="dropdown-item">mypage1</a>
                                 <a href="#" class="dropdown-item">mypage2</a>
                                 <a href="#" class="dropdown-item">mypage3</a>
