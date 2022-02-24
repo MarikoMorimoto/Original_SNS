@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-11 col-lg-8">
-            <h2>仮ページ</h2>
+            <h2>投稿一覧</h2>
             <div class="row text-center mt-2">
                 @forelse ($posts as $post)
                     <div class="col-md-6 mt-3">
@@ -17,9 +17,6 @@
                     <div class="col-md-6 mt-3">
                         <div class="mt-1">
                             {{ $post->title }}
-                        </div>
-                        <div class="col-md-mt-3 text-left">
-                            {!! nl2br(e($post->comment)) !!}
                         </div>
                         <div class="py-2 text-right">
                             {{ $post->created_at }}
