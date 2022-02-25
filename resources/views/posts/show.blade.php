@@ -57,7 +57,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="comment">この投稿について感想など、コメントを追加しませんか？</label>
-                                <textarea class="form-control count_comment" id="comment" name="comment" placeholder="コメントを入力" rows="2">{!! nl2br(e(old('comment'))) !!}</textarea>
+                                <textarea class="form-control count_comment" id="comment" name="comment" placeholder="コメントを入力" rows="2">{{ (old('comment')) }}</textarea>
                                 <div>
                                     <span class="now_count_comment">0</span> / 150 文字
                                 </div>
@@ -108,7 +108,7 @@
 </div>
 <script>
         $('.count_comment').on('input', function(){
-        let count = $(this).val().length;
+        let count = $(this).val().replace(/\n/g, "\r\n").length;
         $('.now_count_comment').text(count);
         if (count > 150) {
             $('.now_count_comment').addClass('text-danger');

@@ -47,7 +47,7 @@
                     <label for="comment" class="col-md-2 col-form-label">コメント</label>
                     {{-- 改行を有効にしつつ、エスケープする --}}
                     <div class="col-md-10">
-                        <textarea class="form-control count_comment" id="comment" name="comment" placeholder="画像についてコメントを入力してください" rows="10">{!! e(old('comment')) !!}</textarea>
+                        <textarea class="form-control count_comment" id="comment" name="comment" placeholder="画像についてコメントを入力してください" rows="10">{{ old('comment') }}</textarea>
                         <div>
                             <span class="now_count_comment">0</span> / 150 文字
                         </div>
@@ -111,7 +111,8 @@
     });
 
     $('.count_comment').on('input', function(){
-        let count = $(this).val().length;
+        // textarea の改行はLF:1文字、PHP側バリデーションは改行CRLF:2文字のため、バリデーションに合うよう改行コードを二文字に置き換え
+        let count = $(this).val().replace(/\n/g, "\r\n").length;
         $('.now_count_comment').text(count);
         if (count > 150) {
             $('.now_count_comment').addClass('text-danger');
