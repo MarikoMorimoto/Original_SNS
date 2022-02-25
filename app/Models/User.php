@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Post;
+use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Like;
+use App\Models\Follow;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
