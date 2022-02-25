@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +40,7 @@ Route::get('/register/after', function () {
     return view('auth.after_register');
 });
 
-Route::get('logout/after', function () {
+Route::get('/logout/after', function () {
     return view('auth.after_logout');
 });
 
@@ -53,3 +54,9 @@ Route::resource('likes', LikeController::class)->only([
 
 // 非同期でのいいねデータ追加用ルート
 Route::post('/likes/ajax', [App\Http\Controllers\LikeController::class, 'ajaxLikes'])->name('likes.ajax');
+
+Route::resource('comments', CommentController::class)->only([
+    'destroy'
+]);
+
+Route::post('/comments/{id}', [CommentController::class, 'addComment'])->name('comments.add');

@@ -9,9 +9,13 @@
                 @forelse ($posts as $post)
                     <div class="col-md-6 mt-3">
                         @if ($post->image !== '')
-                        <img class="img-fluid" src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
+                        <a href="{{ route('posts.show', $post) }}">
+                            <img class="img-fluid" src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
+                        </a>
                         @else
-                        <img class="img-fluid" src="{{ asset('images/no_image.png') }}" alt="no_image">
+                        <a href="{{ route('posts.show', $post) }}">
+                            <img class="img-fluid" src="{{ asset('images/no_image.png') }}" alt="no_image">
+                        </a>
                         @endif
                     </div>
                     <div class="col-md-6 mt-3">
