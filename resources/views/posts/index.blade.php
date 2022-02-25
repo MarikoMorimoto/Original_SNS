@@ -16,7 +16,7 @@
                     </div>
                     <div class="col-md-6 mt-3">
                         <div class="mt-1">
-                            {{ $post->title }}
+                            <a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a>
                         </div>
                         <div class="py-2 text-right">
                             {{ $post->created_at }}
