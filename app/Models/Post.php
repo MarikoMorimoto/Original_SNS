@@ -31,7 +31,7 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function comments(){
+    public function commentsToPost(){
         // 1対多の「1」側の設定 ひとつのPostにたくさんのComments
         return $this->hasMany(Comment::class);
     }

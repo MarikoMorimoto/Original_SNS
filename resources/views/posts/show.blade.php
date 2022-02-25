@@ -67,8 +67,8 @@
                         </form>
                     @endguest
 
-                    @if ($post->comments->count() > 0)
-                        @foreach ($post->comments->sortDesc() as $comment)
+                    @if ($comments->count() > 0)
+                        @foreach ($comments as $comment)
                             <div class="text-left border p-2 px-3 mt-3">
                                 <div class="border-bottom pb-2 mb-2">
                                     {{ $comment->user->name }} さん より
@@ -95,6 +95,9 @@
                             まだこの投稿についてのコメントはありません
                         </div>
                     @endif
+                </div>
+                <div class="col-12 mt-2">
+                    {{ $comments->links() }}
                 </div>
                 <div class="col-12 row justify-content-center">
                     <button class="btn btn-light btn-outline-secondary col-md-8 my-4" onClick="history.back()">戻る</button>

@@ -14,20 +14,22 @@
             @foreach($errors->all() as $error)
             <p class="error text-danger">{{ $error }}</p>
             @endforeach
-
+            
             {{-- 画像データ送信のため enctype を設定 --}}
             <form
-                class="mt-3"
-                method="POST"
-                action="{{ route('posts.store') }}"
-                enctype="multipart/form-data"
+            class="mt-3"
+            method="POST"
+            action="{{ route('posts.store') }}"
+            enctype="multipart/form-data"
             >
-                @csrf
-                <div class="form-group form-row">
-                    <label for="image" class="col-md-2 col-form-label">画像を選択</label>
-                    <div class="col-md-10">
-                        <input id="image" type="file" name="image" class="form-control-file" value="{{ old('image') }}">
-                    </div>
+            @csrf
+            <div class="form-group form-row">
+                {{-- 選択した画像のプレビュー表示 --}}
+                <img class="preview img-fluid">
+                
+                <div class="col-md-10 mt-2">
+                    <input type="file" name="image" class="form-control-file" value="{{ old('image') }}">
+                </div>
                 </div>
                 <div class="form-group form-row">
                     <label for="title" class="col-md-2 col-form-label">タイトル</label>
@@ -45,7 +47,7 @@
                     <label for="comment" class="col-md-2 col-form-label">コメント</label>
                     {{-- 改行を有効にしつつ、エスケープする --}}
                     <div class="col-md-10">
-                        <textarea class="form-control count_comment" id="comment" name="comment" placeholder="画像についてコメントを入力してください" rows="10">{!! nl2br(e(old('comment'))) !!}</textarea>
+                        <textarea class="form-control count_comment" id="comment" name="comment" placeholder="画像についてコメントを入力してください" rows="10">{!! e(old('comment')) !!}</textarea>
                         <div>
                             <span class="now_count_comment">0</span> / 150 文字
                         </div>
@@ -76,6 +78,18 @@
     </div>
 </div>
 <script>
+    // 選択した画像のプレビュー表示
+    $('input[type=file]').on('change', function(e){
+        // 画像ファイルの読み込みクラス
+        let reader = new FileReader();
+        reader.onload = function(e){
+            // src属性に選択した画像ファイルの情報を設定
+            $('.preview').attr('src', e.target.result);
+        }
+        // 読み込んだ画像ファイルをURLに変換
+        reader.readAsDataURL(e.target.files[0]);
+    });
+
     $('.count_title').on('input', function(){
         // 文字数を取得
         let count = $(this).val().length;
