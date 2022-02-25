@@ -79,15 +79,17 @@
                                 <div class="text-right">
                                     {{ $comment->created_at }}
                                 </div>
-                                @if ($comment->user->id === Auth::user()->id)
-                                    <form method="POST" action="{{ route('comments.destroy', $comment) }}">
-                                        @csrf
-                                        @method('delete')
-                                        <div class="text-right">
-                                            <input type="submit" class="btn btn-light btn-outline-secondary" value="コメントを削除">
-                                        </div>
-                                    </form>
-                                @endif
+                                @auth
+                                    @if ($comment->user->id === Auth::user()->id)
+                                        <form method="POST" action="{{ route('comments.destroy', $comment) }}">
+                                            @csrf
+                                            @method('delete')
+                                            <div class="text-right">
+                                                <input type="submit" class="btn btn-light btn-outline-secondary" value="コメントを削除">
+                                            </div>
+                                        </form>
+                                    @endif
+                                @endauth
                             </div>
                         @endforeach
                     @else
@@ -107,7 +109,7 @@
     </div>
 </div>
 <script>
-        $('.count_comment').on('input', function(){
+    $('.count_comment').on('input', function(){
         let count = $(this).val().replace(/\n/g, "\r\n").length;
         $('.now_count_comment').text(count);
         if (count > 150) {
@@ -123,8 +125,6 @@
 
     // リロード時に初期文字列が入っていた時の処理
     $('.count_comment').trigger('input');
-
-
 </script>
 
 @endsection
