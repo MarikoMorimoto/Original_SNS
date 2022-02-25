@@ -32,8 +32,10 @@
                     投稿はありません。
                 </p>
                 @endforelse
+                <div class="col-12 mt-3">
+                    {{ $posts->links() }}
+                </div>
             </div>
-            {{ $posts->links() }}
         </div>
     </div>
 </div>

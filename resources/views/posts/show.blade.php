@@ -68,13 +68,16 @@
                     @endguest
 
                     @if ($post->comments->count() > 0)
-                        @foreach ($post->comments as $comment)
+                        @foreach ($post->comments->sortDesc() as $comment)
                             <div class="text-left border p-2 px-3 mt-3">
                                 <div class="border-bottom pb-2 mb-2">
                                     {{ $comment->user->name }} さん より
                                 </div>
                                 <div>
                                     {!! nl2br(e($comment->comment)) !!}
+                                </div>
+                                <div class="text-right">
+                                    {{ $comment->created_at }}
                                 </div>
                                 @if ($comment->user->id === Auth::user()->id)
                                     <form method="POST" action="{{ route('comments.destroy', $comment) }}">
