@@ -36,10 +36,20 @@
                 <div class="col-12 text-left mt-3">
                     {!! nl2br(e($post->comment)) !!}
                 </div>
+                <div class="col-12 text-right">
+                    {{-- いいねの実装 --}}
+                        @auth
+                            @if ($post->isLikedBy(Auth::user()))
+                                いいね!!<i class="fas fa-heart fa-2x like_toggle liked" data-id="{{ $post->id }}"></i>
+                            @else
+                                いいね!!<i class="far fa-heart fa-2x like_toggle" data-id="{{ $post->id }}"></i>
+                            @endif
+                        @endauth
+                </div>
                 <div class="col-12 py-2 text-right py-3">
                     {{ $post->created_at }}
                 </div>
-                <div class="col-12 text-left mt-3">
+                <div class="col-12 text-left">
                     投稿者: {{ $post->user->name }}
                 </div>
                 <div class="col-12 mt-3 text-right">
@@ -125,6 +135,29 @@
 
     // リロード時に初期文字列が入っていた時の処理
     $('.count_comment').trigger('input');
+
+
+    // いいねボタンの処理
+    $('.like_toggle').on('click', function(){
+        let clicked_like = $(this);
+        let likedPostId = $(clicked_like).data('id');
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '/likes/ajax',
+            method: 'POST',
+            data: {
+                'post_id': likedPostId
+            },
+        }).done(function(){
+            // toggleClass() 対象となる要素のclass属性の追加・削除を繰り返すことができる
+            $(clicked_like).toggleClass('liked far fas');
+        }).fail(function(){
+            alert('いいねボタンについてエラーが発生しました。')
+        });
+    })
+
 </script>
 
 @endsection

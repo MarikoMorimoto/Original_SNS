@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+// 名前空間で定義しているから以下の記述はいらない
 // use App\Models\User;
 // use App\Models\Category;
 // use App\Models\Comment;
@@ -32,7 +33,8 @@ class Post extends Model
     }
 
     public function commentsToPost(){
-        // dd(Comment::class);
+        // toSql には () を必ずつけないとエラーになる！
+        // dd($this->hasMany(Comment::class)->orderBy('created_at')->toSql);
         // 1対多の「1」側の設定 ひとつのPostにたくさんのComments
         return $this->hasMany(Comment::class);
     }

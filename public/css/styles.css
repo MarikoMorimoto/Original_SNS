@@ -34,3 +34,13 @@ h2 {
 .list-group > a:last-child {
     border-bottom: none;
 }
+
+/* いいねボタン */
+.like_toggle {
+    color: gray;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.liked {
+    color: pink;
+}
