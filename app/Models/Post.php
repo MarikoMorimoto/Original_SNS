@@ -32,6 +32,11 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function catagoryWithPost(){
+        // ひとつのPostにひとつのCategory
+        return $this->hasOne(Category::class);
+    }
+
     public function commentsToPost(){
         // toSql には () を必ずつけないとエラーになる！
         // dd($this->hasMany(Comment::class)->orderBy('created_at')->toSql);
@@ -45,6 +50,7 @@ class Post extends Model
     }
 
     // 中間テーブルを介したn対mのリレーションを設定
+    // この場合は中間テーブル名を記載
     public function likedUsers(){
         return $this->belongsToMany(User::class, 'likes');
     }

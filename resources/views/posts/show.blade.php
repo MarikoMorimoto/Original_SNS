@@ -47,6 +47,7 @@
                         @endauth
                 </div>
                 <div class="col-12 py-2 text-right py-3">
+                    カテゴリー : {{ $post->category->name}}<br>
                     {{ $post->created_at }}
                 </div>
                 <div class="col-12 text-left">

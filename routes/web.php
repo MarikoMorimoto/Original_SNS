@@ -46,6 +46,9 @@ Route::get('/logout/after', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// 検索結果表示用ルート Route::resource('posts')より上に記述しないと、優先度が下がるため、エラーになる
+Route::get('/posts/search', [PostsController::class, 'search'])->name('posts.search');
+
 Route::resource('posts', PostsController::class);
 
 Route::resource('likes', LikeController::class)->only([
