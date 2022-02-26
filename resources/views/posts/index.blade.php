@@ -6,6 +6,17 @@
         <div class="col-md-11 col-lg-8">
             <h2>投稿一覧</h2>
             <div class="row text-center mt-2">
+                <!-- 検索フォーム -->
+                <section class="col-12">
+                    <form action="{{ route('posts.index') }}" class="form-inline my-3 justify-content-center">
+                        <div class="row form-group w-100">
+                            <label class="sr-only" for="keyword">検索キーワード</label>
+                            <input type="search" name="keyword" value="{{ $keyword }}" class="form-control col-10" placeholder="地名・花の名前など">
+                            <button type="submit" class="btn btn-light border col-2">検索</button>
+                        </div>
+                    </form>
+                </section>
+
                 @forelse ($posts as $post)
                     <div class="col-md-6 mt-3">
                         @if ($post->image !== '')

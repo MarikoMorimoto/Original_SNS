@@ -19,11 +19,37 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::latest()->paginate(5);
+        // ->input() ビュー側の <input name="keyword"> と紐づけ
+        $keyword = $request->keyword;
+        // dd($keyword);
+        $query = Post::query();
+        // dd($query->category);
+
+        if (!empty($keyword)) {
+            // like検索、第3引数の両側に%で部分一致検索、orWhere でタイトル・コメント・カテゴリから検索
+            // あいまい検索
+            // 下記のコードだと失敗した！Posts テーブルの中にはcategory というカラムは無い。
+            // category も検索したいなら、Catagories テーブルと結合する必要がある。
+            // $posts = Post::where('title', 'like', '%'.$keyword.'%')
+            //     ->orWhere
+            //     ->orWhere('comment', 'like', '%'.$keyword.'%')
+            //     ->orWhere('category', 'like', '%'.$keyword.'%')
+            //     ->latest()->paginate(5);
+            $posts = $query->where('title', 'like', '%'.$keyword.'%')
+                ->orWhere('comment', 'like', '%'.$keyword.'%')
+                // ->orWhere('name')
+                ->latest()->paginate(5);
+
+        } else {
+            $posts = $query->latest()->paginate(5);
+        }
+
+        // dd($posts);
         return view('posts.index', [
             'posts' => $posts,
+            'keyword' => $keyword
         ]);
     }
 
@@ -108,5 +134,9 @@ class PostsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(){
+        return view('posts.search');
     }
 }
