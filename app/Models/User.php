@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Post;
-use App\Models\Category;
-use App\Models\Comment;
-use App\Models\Like;
-use App\Models\Follow;
+// 名前空間で定義しているから以下の記述はいらない
+// use App\Models\Post;
+// use App\Models\Category;
+// use App\Models\Comment;
+// use App\Models\Like;
+// use App\Models\Follow;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -67,7 +68,10 @@ class User extends Authenticatable implements MustVerifyEmail
     // 中間テーブルを介したn対mのリレーションを設定
     public function likePosts(){
         // belongsToMany(モデルクラス名, 中間テーブル名)
-        return $this->belongsToMany(Post::class, 'likes');
+        return $this->belongsToMany(Post::class, 'likes')
+        // 中間テーブルに追加した時間で降順に並べ替え
+                    ->withPivot('created_at')
+                    ->orderBy('pivot_created_at', 'desc');
     }
 
     public function follows(){
