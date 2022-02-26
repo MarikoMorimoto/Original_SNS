@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Post;
+// 名前空間で定義しているから以下の記述はいらない
+// use App\Models\Post;
 
 class Category extends Model
 {

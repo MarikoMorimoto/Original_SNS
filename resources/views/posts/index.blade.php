@@ -38,7 +38,7 @@
                     </div>
                     <div class="col-12 py-2 border-bottom"></div>
                 @empty
-                <p class="mt-3">
+                <p class="col-12 mt-3">
                     投稿はありません。
                 </p>
                 @endforelse

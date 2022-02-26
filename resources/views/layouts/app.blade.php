@@ -83,7 +83,7 @@
                                 {{ Auth::user()->name }} さんのマイページ
                             </a>
                             <div class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
-                                <a href="#" class="dropdown-item">mypage1</a>
+                                <a href="{{ route('likes.index') }}" class="dropdown-item">いいね!! した投稿一覧</a>
                                 <a href="#" class="dropdown-item">mypage2</a>
                                 <a href="#" class="dropdown-item">mypage3</a>
                             </div>

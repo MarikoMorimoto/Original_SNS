@@ -10,7 +10,11 @@ use App\Models\Like;
 class LikeController extends Controller
 {
     public function index(){
-        // 
+        $user = \Auth::user();
+        $posts = $user->likePosts()->paginate(5);
+        return view('likes.index', [
+            'posts' => $posts,
+        ]);
     }
 
     public function ajaxLikes(AjaxLikeRequest $request){
