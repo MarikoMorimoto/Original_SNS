@@ -1,10 +1,13 @@
 <?php
 
+// AAA::class とすると、App\Http\Controllers（名前空間）\AAA が示される
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\DB;
+// 継承していれば、名前空間よりも優先されるため
+// Post::class とすると、App\Models\Post が示される。
 use App\Models\Post;
 use App\Models\User;
 use App\Services\FileUploadService;

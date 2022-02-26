@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use App\Models\Category;
-use App\Models\Comment;
-use App\Models\Like;
+// use App\Models\User;
+// use App\Models\Category;
+// use App\Models\Comment;
+// use App\Models\Like;
 
 class Post extends Model
 {
@@ -32,6 +32,7 @@ class Post extends Model
     }
 
     public function commentsToPost(){
+        // dd(Comment::class);
         // 1対多の「1」側の設定 ひとつのPostにたくさんのComments
         return $this->hasMany(Comment::class);
     }
