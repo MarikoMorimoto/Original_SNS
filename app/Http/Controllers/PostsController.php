@@ -47,7 +47,8 @@ class PostsController extends Controller
             // $posts = DB::table('posts')だと下記エラー
             // Object of class stdClass could not be converted to string 
             
-            // $posts = Post::query() だとOK
+            // $posts = Post::query()-> OK
+            // $posts = Post::rightJoind() OK
             
             $posts = $query
                 ->rightJoin('categories', 'posts.category_id', '=', 'categories.id')
