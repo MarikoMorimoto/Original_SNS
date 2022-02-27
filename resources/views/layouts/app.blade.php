@@ -84,7 +84,7 @@
                             </a>
                             <div class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
                                 <a href="{{ route('likes.index') }}" class="dropdown-item">いいね!! した投稿一覧</a>
-                                <a href="#" class="dropdown-item">mypage2</a>
+                                <a href="{{ route('user.exhibition', Auth::user()->id ) }}" class="dropdown-item">{{ Auth::user()->name }}さんの投稿一覧</a>
                                 <a href="#" class="dropdown-item">mypage3</a>
                             </div>
                         </li>
