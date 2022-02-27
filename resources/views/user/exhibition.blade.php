@@ -26,7 +26,7 @@
                         <div class="col-12 text-right">
                             {{-- いいねの実装 --}}
                             @auth
-                                @if ($post->isLikedBy(Auth::user()))
+                                @if ($post->isLikedBy($user))
                                     いいね!!<i class="fas fa-heart fa-2x like_toggle liked" data-id="{{ $post->id }}"></i>
                                 @else
                                     いいね!!<i class="far fa-heart fa-2x like_toggle" data-id="{{ $post->id }}"></i>

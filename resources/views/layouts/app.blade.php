@@ -80,11 +80,11 @@
                         <li class="nav-item"><a href="{{ route('posts.search') }}" class="nav-link"><i class="fas fas fa-seedling"> 投稿検索</i></a></li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} さんのマイページ
+                                {{ $user->name }} さんのマイページ
                             </a>
                             <div class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
                                 <a href="{{ route('likes.index') }}" class="dropdown-item">いいね!! した投稿一覧</a>
-                                <a href="{{ route('user.exhibition', Auth::user()->id ) }}" class="dropdown-item">{{ Auth::user()->name }}さんの投稿一覧</a>
+                                <a href="{{ route('user.exhibition', $user->id ) }}" class="dropdown-item">{{ $user->name }}さんの投稿一覧</a>
                                 <a href="#" class="dropdown-item">mypage3</a>
                             </div>
                         </li>
