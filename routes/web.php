@@ -7,6 +7,7 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,3 +64,7 @@ Route::resource('comments', CommentController::class)->only([
 ]);
 
 Route::post('/comments/{id}', [CommentController::class, 'addComment'])->name('comments.add');
+
+Route::get('/user/exhibition/{id}', [UserController::class, 'exhibition'])->name('user.exhibition');
+
+Route::get('/user/profile', [UserController::class, 'exhibitions'])->name('user.profile');
