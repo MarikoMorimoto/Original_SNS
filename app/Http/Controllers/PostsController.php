@@ -24,9 +24,15 @@ class PostsController extends Controller
         // ->input() ビュー側の <input name="keyword"> と紐づけ
         $keyword = $request->keyword;
         // dd($keyword);
+        // dd(Post::query()); // Illuminate\Database\Eloquent\Builder
+        // dd(DB::table('posts')); // Illuminate\Database\Query\Builder
         $query = Post::query();
-        // dd($query->category);
-
+        // dd($query->category); // posts テーブルにcategory カラムは無い。当該カラムはcategoriesテーブルにある。
+        
+        // dd(DB::table('posts')->rightJoin('categories', 'posts.category_id', '=', 'categories.id')
+        // ->select('posts.*', 'categories.name')->where('title', 'like', '%'.$keyword.'%')->orWhere('comment', 'like', '%'.$keyword.'%')
+        // ->orWhere('name', 'like', '%'.$keyword.'%')->orderByDesc('posts.created_at')->get());
+        // 上記コードでソートをlatest() にすると、posts のcreated_at でのソートかcategories のcreated_at でのソートが判別ができずエラーになる 
         if (!empty($keyword)) {
             // like検索、第3引数の両側に%で部分一致検索、orWhere でタイトル・コメント・カテゴリから検索
             // あいまい検索
@@ -37,10 +43,29 @@ class PostsController extends Controller
             //     ->orWhere('comment', 'like', '%'.$keyword.'%')
             //     ->orWhere('category', 'like', '%'.$keyword.'%')
             //     ->latest()->paginate(5);
-            $posts = $query->where('title', 'like', '%'.$keyword.'%')
+
+            // $posts = DB::table('posts')だと下記エラー
+            // Object of class stdClass could not be converted to string 
+            
+            // $posts = Post::query() だとOK
+            
+            $posts = $query
+                ->rightJoin('categories', 'posts.category_id', '=', 'categories.id')
+                ->select('posts.*', 'categories.name')
+                ->where('title', 'like', '%'.$keyword.'%')
                 ->orWhere('comment', 'like', '%'.$keyword.'%')
-                // ->orWhere('name')
-                ->latest()->paginate(5);
+                ->orWhere('name', 'like', '%'.$keyword.'%')
+                ->orderByDesc('posts.created_at')->paginate(5);
+
+            // 下記の方法でもできる 
+            // $in_category = DB::table('categories')
+            //     ->where('name', 'like', '%'.$keyword.'%')
+            //     ->get(); // コレクション
+            // $posts = $query
+            //     ->whereIn('category_id', $in_category->pluck('id'))
+            //     ->orWhere('title', 'like', '%'.$keyword.'%')
+            //     ->orWhere('comment', 'like', '%'.$keyword.'%')
+            //     ->latest()->paginate(5);
 
         } else {
             $posts = $query->latest()->paginate(5);
