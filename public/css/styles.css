@@ -48,3 +48,22 @@ h2 {
 .liked {
     color: pink;
 }
+
+/* フォローボタン */
+.follow_toggle {
+    color:rgb(102, 102, 102);
+    background-color: rgb(255, 242, 230);
+    border:1px solid rgb(150, 150, 150); 
+    margin-left: 10px;
+    outline: none;
+}
+
+.followed {
+    color:rgb(99, 99, 99);
+    background-color:rgba(199, 198, 255, 0.521);
+    border:1px solid rgba(151, 149, 240, 0.801);
+}
+
+button.btn.cursor-pointer.follow_toggle.btn:focus {
+    box-shadow: none !important;
+}

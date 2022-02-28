@@ -53,7 +53,7 @@
 <script>
     $('.like_toggle').on('click', function(){
         let clicked_like = $(this);
-        let likedPostId = $(clicked_like).data('id');
+        let liked_post_id = $(clicked_like).data('id');
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -61,13 +61,13 @@
             url: '/likes/ajax',
             method: 'POST',
             data: {
-                'post_id': likedPostId
+                'post_id': liked_post_id
             },
         }).done(function(){
             // toggleClass() 対象となる要素のclass属性の追加・削除を繰り返すことができる
             $(clicked_like).toggleClass('liked far fas');
         }).fail(function(){
-            alert('いいねボタンについてエラーが発生しました。')
+            alert('いいねボタンにエラーが発生しました。画面を更新してください。')
         });
     })
 </script>
