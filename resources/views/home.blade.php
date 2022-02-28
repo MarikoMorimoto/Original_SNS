@@ -69,14 +69,18 @@
             <!-- lgサイズ以上の時 左側に表示 -->
             <div class="d-none d-lg-block">
                 <h2><i class="far fa-thumbs-up fa-lg"></i> カテゴリ別画像</h2>
-                <div class="list-group list-group-flush">
-                    <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-hashtag" style="color:#333333;"></i> 道ばた</a>
-                    <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-hashtag" style="color:#333333;"></i> 公園</a>
-                    <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-hashtag" style="color:#333333;"></i> ガーデニング</a>
-                    <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-hashtag" style="color:#333333;"></i> 観光地</a>
-                    <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-hashtag" style="color:#333333;"></i> 秘密の場所</a>
-                    <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-hashtag" style="color:#333333;"></i> その他</a>
-                </div>
+                <ul class="list-group list-group-flush">
+                    @foreach ($categories as $category)
+                        <li class="list-group-item list-group-item-action cursor-pointer"
+                            onclick="document.getElementById('category-input-1').setAttribute('value', '{{ $category->name}}' );
+                                    document.getElementById('category-form-1').submit();">
+                            <i class="fas fa-hashtag" style="color:#333333;"></i> {{ $category->name }}
+                        </li>
+                    @endforeach
+                    <form id="category-form-1" action="{{ route('posts.index') }}" class="d-none">
+                        <input id="category-input-1" type="hidden" name="keyword">
+                    </form>
+                </ul>
             </div>
         </div>
         <div class="col-lg-9 col-12">
@@ -100,25 +104,20 @@
         <div class="col-12">
             <div class="d-lg-none d-block">
                 <h2><i class="far fa-thumbs-up fa-lg"></i> カテゴリ別画像</h2>
-                <div class="row">
-                    <div class="col-4">
-                        <a class="btn btn-outline-secondary w-100 my-4" href="#">道ばた</a>
-                    </div>
-                    <div class="col-4">
-                        <a class="btn btn-outline-secondary w-100 my-4" href="#">公園</a>
-                    </div>
-                    <div class="col-4">
-                        <a class="btn btn-outline-secondary w-100 my-4" href="#">ガーデニング</a>
-                    </div>
-                    <div class="col-4">
-                        <a class="btn btn-outline-secondary w-100 mb-4" href="#">観光地</a>
-                    </div>
-                    <div class="col-4">
-                        <a class="btn btn-outline-secondary w-100 mb-4" href="#">秘密の場所</a>
-                    </div>
-                    <div class="col-4">
-                        <a class="btn btn-outline-secondary w-100 mb-4" href="#">その他</a>
-                    </div>
+                <div class="row my-3">
+                    @foreach ($categories as $category)
+                        <div class="col-4">
+                            <a class="btn btn-outline-secondary w-100 carsor-pointer my-2"
+                                href="#"
+                                onclick="event.preventDefault();
+                                    document.getElementById('category-input-2').setAttribute('value', '{{ $category->name}}' );
+                                    document.getElementById('category-form-2').submit();">{{ $category->name }}
+                            </a>
+                            <form id="category-form-2" action="{{ route('posts.index') }}" class="d-none">
+                                <input id="category-input-2" type="hidden" name="keyword">
+                            </form>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>

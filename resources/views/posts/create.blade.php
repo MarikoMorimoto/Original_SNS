@@ -22,14 +22,14 @@
             action="{{ route('posts.store') }}"
             enctype="multipart/form-data"
             >
-            @csrf
-            <div class="form-group form-row">
-                {{-- 選択した画像のプレビュー表示 --}}
-                <img class="preview img-fluid">
-                
-                <div class="col-md-10 mt-2">
-                    <input type="file" name="image" class="form-control-file" value="{{ old('image') }}">
-                </div>
+                @csrf
+                <div class="form-group form-row">
+                    {{-- 選択した画像のプレビュー表示 --}}
+                    <img class="preview img-fluid">
+                    
+                    <span class="pl-1 mt-2">
+                        <input type="file" name="image" class="form-control-file" value="{{ old('image') }}">
+                    </span>
                 </div>
                 <div class="form-group form-row">
                     <label for="title" class="col-md-2 col-form-label">タイトル</label>

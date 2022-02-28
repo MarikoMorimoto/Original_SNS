@@ -27,7 +27,7 @@
                             {{ $post->created_at }}
                         </div>
                         <div class="col-12 text-right">
-                            いいね!!<i class="fas fa-heart fa-2x like_toggle liked" data-id="{{ $post->id }}"></i><br>
+                            いいね!!<i class="fas fa-heart fa-2x like_toggle liked cursor-pointer" data-id="{{ $post->id }}"></i><br>
                             いいね!! した時間 {{ $post->pivot->created_at }}
                         </div>
                     </div>
