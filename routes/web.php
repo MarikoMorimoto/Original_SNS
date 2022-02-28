@@ -8,6 +8,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FollowController;
 use App\Models\Category;
 
 /*
@@ -28,6 +29,8 @@ Route::get('/', function () {
         'categories' => $categories
     ]);
 });
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Auth::routes();
 // メール認証機能追加のため書き換え
@@ -50,7 +53,6 @@ Route::get('/logout/after', function () {
     return view('auth.after_logout');
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // 検索結果表示用ルート Route::resource('posts')より上に記述しないと、優先度が下がるため、エラーになる
 Route::get('/posts/search', [PostsController::class, 'search'])->name('posts.search');
@@ -62,7 +64,7 @@ Route::resource('likes', LikeController::class)->only([
 ]);
 
 // 非同期でのいいねデータ追加用ルート
-Route::post('/likes/ajax', [App\Http\Controllers\LikeController::class, 'ajaxLikes'])->name('likes.ajax');
+Route::post('/likes/ajax', [LikeController::class, 'ajaxLikes'])->name('likes.ajax');
 
 Route::resource('comments', CommentController::class)->only([
     'destroy'
@@ -73,3 +75,5 @@ Route::post('/comments/{id}', [CommentController::class, 'addComment'])->name('c
 Route::get('/user/exhibition/{id}', [UserController::class, 'exhibition'])->name('user.exhibition');
 
 Route::get('/user/profile', [UserController::class, 'exhibitions'])->name('user.profile');
+
+Route::post('/follow/ajax', [FollowController::class, 'ajaxFollows'])->name('follow.ajax');

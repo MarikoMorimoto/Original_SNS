@@ -52,6 +52,14 @@
                 </div>
                 <div class="col-12 text-left">
                     投稿者: {{ $post->user->name }}
+                    @auth
+                        {{-- ログインユーザー$user が 投稿元ユーザー$post->userをフォローしているならtrue --}}
+                        @if ($user->isFollowing($post->user))
+                            <button class="btn followed cursor-pointer follow_toggle" data-id="{{ $post->user->id }}">フォロー中</button>
+                        @else
+                            <button class="btn cursor-pointer follow_toggle" data-id="{{ $post->user->id }}">フォローする</button>
+                        @endif
+                    @endauth
                 </div>
                 <div class="col-12 mt-3 text-right">
                     <i class="far fa-comment-dots fa-2x"></i>
@@ -141,7 +149,7 @@
     // いいねボタンの処理
     $('.like_toggle').on('click', function(){
         let clicked_like = $(this);
-        let likedPostId = $(clicked_like).data('id');
+        let liked_post_id = $(clicked_like).data('id');
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -149,15 +157,37 @@
             url: '/likes/ajax',
             method: 'POST',
             data: {
-                'post_id': likedPostId
+                'post_id': liked_post_id
             },
         }).done(function(){
             // toggleClass() 対象となる要素のclass属性の追加・削除を繰り返すことができる
             $(clicked_like).toggleClass('liked far fas');
         }).fail(function(){
-            alert('いいねボタンについてエラーが発生しました。')
+            alert('いいねボタンにエラーが発生しました。画面を更新してください。')
         });
-    })
+    });
+    // フォローボタンの処理
+    $('.follow_toggle').on('click', function(){
+        let clicked_follow = $(this);
+        let follow_user_id = $(clicked_follow).data('id');
+        console.log(follow_user_id);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '/follow/ajax',
+            method: 'POST',
+            data: {
+                'follow_id': follow_user_id
+            },
+        }).done(function(){
+            $(clicked_follow).toggleClass('followed');
+            $('.follow_toggle').text('フォローする');
+            $('.followed').text('フォロー中');
+        }).fail(function(){
+            alert('フォローボタンにエラーが発生しました。画面を更新してください。')
+        });
+    });
 
 </script>
 
