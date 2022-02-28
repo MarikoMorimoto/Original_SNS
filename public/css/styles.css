@@ -6,13 +6,14 @@
     opacity: 0.9;
 }
 
+/* ナビゲーションバーと重なる部分をpaddingで空ける */
+body {
+    padding-top: 5rem;
+}
+
 /* カルーセル */
 .carousel-inner {
     max-height: 300px;
-}
-
-body {
-    padding-top: 5rem;
 }
 
 /* メインコンテンツ */
@@ -28,17 +29,20 @@ h2 {
 .list-group-item {
     border: dashed 1px #777777;
 }
-.list-group > a:first-child {
+.list-group > li:first-child {
     border-top: none;
 }
-.list-group > a:last-child {
+.list-group > li:last-child {
     border-bottom: none;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }
 
 /* いいねボタン */
 .like_toggle {
     color: gray;
-    cursor: pointer;
     margin-left: 10px;
 }
 .liked {
