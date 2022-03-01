@@ -3,8 +3,12 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-11 col-lg-8">
+        <div class="col-12">
             <h2>投稿詳細</h2>
+            @foreach($errors->all() as $error)
+            <p class="error text-danger">{{ $error }}</p>
+            @endforeach
+
             <!-- セッションにフラッシュメッセージがセットされている時だけ表示 -->
             @if (session('status'))
             <div class="container mt-3">
@@ -23,105 +27,134 @@
             </div>
             @endif
             <div class="row justify-content-center mt-4">
-                <div class="col-12">
+                <div class="col-12 text-center">
                     @if ($post->image !== '')
                     <img class="img-fluid" src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
                     @else
                     <img class="img-fluid" src="{{ asset('images/no_image.png') }}" alt="no_image">
                     @endif
                 </div>
-                <div class="col-12 text-center mt-3">
-                    {{ $post->title }}
-                </div>
-                <div class="col-12 text-left mt-3">
-                    {!! nl2br(e($post->comment)) !!}
-                </div>
-                <div class="col-12 text-right">
-                    {{-- いいねの実装 --}}
-                        @auth
-                            @if ($post->isLikedBy($user))
-                                いいね!!<i class="fas fa-heart fa-2x like_toggle liked cursor-pointer" data-id="{{ $post->id }}"></i>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-11 col-lg-8">
+                    <div class="col-12 text-center mt-3">
+                        {{ $post->title }}
+                    </div>
+                    <div class="col-12 text-left mt-3">
+                        {!! nl2br(e($post->comment)) !!}
+                    </div>
+                    <div class="col-12 text-right">
+                        {{-- いいねの実装 --}}
+                            @auth
+                                @if ($post->isLikedBy($user))
+                                    いいね!!<i class="fas fa-heart fa-2x like_toggle liked cursor-pointer" data-id="{{ $post->id }}"></i>
+                                @else
+                                    いいね!!<i class="far fa-heart fa-2x like_toggle cursor-pointer" data-id="{{ $post->id }}"></i>
+                                @endif
+                            @endauth
+                    </div>
+                    <div class="col-12 py-2 text-right py-3">
+                        カテゴリー : {{ $post->category->name}}<br>
+                        {{ $post->created_at }}
+                    </div>
+                    <div class="col-12 text-left d-flex">
+                        <div class="avatar align-self-center">
+                            @if ($post->user->image !== '')
+                                <img src="{{ \Storage::url($post->user->image) }}" alt="avatar">
                             @else
-                                いいね!!<i class="far fa-heart fa-2x like_toggle cursor-pointer" data-id="{{ $post->id }}"></i>
+                                <img src="{{ asset('images/profile_icon.png') }}" alt="avatar">
+                            @endif
+                        </div>
+                        <div class="ml-2 align-self-center">
+                            <a href="{{ route('users.show', $post->user->id) }}">{{ $post->user->name }}</a>
+                        </div>
+
+                        @auth
+                            {{-- ログインユーザー$user が 投稿元ユーザーと同じでないとき表示 --}}
+                            @if ($user != $post->user)
+                                {{-- ログインユーザー$user が 投稿元ユーザー$post->userをフォローしているならtrue --}}
+                                @if ($user->isFollowing($post->user))
+                                    <button class="btn followed cursor-pointer follow_toggle" data-id="{{ $post->user->id }}">フォロー解除</button>
+                                @else
+                                    <button class="btn cursor-pointer follow_toggle" data-id="{{ $post->user->id }}">フォロー</button>
+                                @endif
                             @endif
                         @endauth
-                </div>
-                <div class="col-12 py-2 text-right py-3">
-                    カテゴリー : {{ $post->category->name}}<br>
-                    {{ $post->created_at }}
-                </div>
-                <div class="col-12 text-left">
-                    投稿者: {{ $post->user->name }}
-                    @auth
-                        {{-- ログインユーザー$user が 投稿元ユーザー$post->userをフォローしているならtrue --}}
-                        @if ($user->isFollowing($post->user))
-                            <button class="btn followed cursor-pointer follow_toggle" data-id="{{ $post->user->id }}">フォロー中</button>
-                        @else
-                            <button class="btn cursor-pointer follow_toggle" data-id="{{ $post->user->id }}">フォローする</button>
-                        @endif
-                    @endauth
-                </div>
-                <div class="col-12 mt-3 text-right">
-                    <i class="far fa-comment-dots fa-2x"></i>
-                    <span>コメント</span>
-                    @guest
-                        <div>
-                            <span>ユーザー登録をするとコメントができるようになります!</span>
+                    </div>
+                    <div class="col-12 mt-3 text-right">
+                        <i class="far fa-comment-dots fa-2x"></i>
+                        <span>コメント</span>
+                        @guest
                             <div>
-                                <a class="btn btn-link" href="{{ route('register') }}">{{ 'ユーザー登録がお済みでない方はこちら' }}</a>
-                            </div>
-                        </div>
-                    @else
-                        <form method="POST" action="{{ route('comments.add', $post) }}">
-                            @csrf
-                            <div class="form-group">
-                                <label for="comment">この投稿について感想など、コメントを追加しませんか？</label>
-                                <textarea class="form-control count_comment" id="comment" name="comment" placeholder="コメントを入力" rows="2">{{ (old('comment')) }}</textarea>
+                                <span>ユーザー登録をするとコメントができるようになります!</span>
                                 <div>
-                                    <span class="now_count_comment">0</span> / 150 文字
+                                    <a class="btn btn-link" href="{{ route('register') }}">{{ 'ユーザー登録がお済みでない方はこちら' }}</a>
                                 </div>
-                                <span class="over_count_comment"></span>
                             </div>
-                            <input class="submit btn btn-light btn-outline-secondary" type="submit" value="コメントを追加">
-                        </form>
-                    @endguest
+                        @else
+                            <form method="POST" action="{{ route('comments.add', $post) }}">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="comment">この投稿について感想など、コメントを追加しませんか？</label>
+                                    <textarea class="form-control count_comment" id="comment" name="comment" placeholder="コメントを入力" rows="2">{{ (old('comment')) }}</textarea>
+                                    <div>
+                                        <span class="now_count_comment">0</span> / 150 文字
+                                    </div>
+                                    <span class="over_count_comment"></span>
+                                </div>
+                                <input class="submit btn btn-light btn-outline-secondary" type="submit" value="コメントを追加">
+                            </form>
+                        @endguest
 
-                    @if ($comments->count() > 0)
-                        @foreach ($comments as $comment)
+                        @if ($comments->count() > 0)
+                            @foreach ($comments as $comment)
+                                <div class="text-left border p-2 px-3 mt-3">
+                                    <div class="border-bottom pb-2 mb-2 d-flex">
+                                        <div class="avatar comment align-self-center">
+                                            @if ($comment->user->image !== '')
+                                                <img src="{{ \Storage::url($comment->user->image) }}" alt="avatar">
+                                            @else
+                                                <img src="{{ asset('images/profile_icon.png') }}" alt="avatar">
+                                            @endif
+                                        </div>
+                                        <div class="ml-2 align-self-center">
+                                            <a href="{{ route('users.show', $comment->user->id) }}">
+                                                {{ $comment->user->name }}
+                                            </a>
+                                                さん より
+                                        </div>
+                                    </div>
+                                    <div>
+                                        {!! nl2br(e($comment->comment)) !!}
+                                    </div>
+                                    <div class="text-right">
+                                        {{ $comment->created_at }}
+                                    </div>
+                                    @auth
+                                        @if ($comment->user->id === $user->id)
+                                            <form method="POST" action="{{ route('comments.destroy', $comment) }}">
+                                                @csrf
+                                                @method('delete')
+                                                <div class="text-right">
+                                                    <input type="submit" class="btn btn-light btn-outline-secondary" value="コメントを削除">
+                                                </div>
+                                            </form>
+                                        @endif
+                                    @endauth
+                                </div>
+                            @endforeach
+                        @else
                             <div class="text-left border p-2 px-3 mt-3">
-                                <div class="border-bottom pb-2 mb-2">
-                                    {{ $comment->user->name }} さん より
-                                </div>
-                                <div>
-                                    {!! nl2br(e($comment->comment)) !!}
-                                </div>
-                                <div class="text-right">
-                                    {{ $comment->created_at }}
-                                </div>
-                                @auth
-                                    @if ($comment->user->id === $user->id)
-                                        <form method="POST" action="{{ route('comments.destroy', $comment) }}">
-                                            @csrf
-                                            @method('delete')
-                                            <div class="text-right">
-                                                <input type="submit" class="btn btn-light btn-outline-secondary" value="コメントを削除">
-                                            </div>
-                                        </form>
-                                    @endif
-                                @endauth
+                                まだこの投稿についてのコメントはありません
                             </div>
-                        @endforeach
-                    @else
-                        <div class="text-left border p-2 px-3 mt-3">
-                            まだこの投稿についてのコメントはありません
-                        </div>
-                    @endif
-                </div>
-                <div class="col-12 mt-2">
-                    {{ $comments->links() }}
-                </div>
-                <div class="col-12 row justify-content-center">
-                    <button class="btn btn-light btn-outline-secondary col-md-8 my-4" onClick="history.back()">戻る</button>
+                        @endif
+                    </div>
+                    <div class="col-12 mt-2">
+                        {{ $comments->appends(request()->query())->links() }}
+                    </div>
+                    <div class="col-12 text-center">
+                        <button class="btn btn-light btn-outline-secondary col-md-8 my-4" onClick="history.back()">戻る</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -182,8 +215,8 @@
             },
         }).done(function(){
             $(clicked_follow).toggleClass('followed');
-            $('.follow_toggle').text('フォローする');
-            $('.followed').text('フォロー中');
+            $('.follow_toggle').text('フォロー');
+            $('.followed').text('フォロー解除');
         }).fail(function(){
             alert('フォローボタンにエラーが発生しました。画面を更新してください。')
         });

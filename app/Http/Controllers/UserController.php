@@ -19,7 +19,12 @@ class UserController extends Controller
 
     // 誰でもアクセスできるユーザープロフィールページ
     public function show($id){
-        $user = User::find($id);
+        $show_user = User::find($id);
+        $posts = Post::where('user_id', $id)->latest()->limit(3)->get();
+        return view('users.show', [
+            'show_user' => $show_user,
+            'posts' => $posts
+        ]);
     }
 
     // マイページの編集ページ
@@ -58,7 +63,7 @@ class UserController extends Controller
     }
 
     public function posts($id){
-        $posts = Post::where('user_id', $id)->paginate(5);
+        $posts = Post::where('user_id', $id)->latest()->paginate(5);
         // dd(Post::find($id)->get()); NG すべてのid の posts が取得される
         $user_name = User::find($id)->name;
         return view('users.posts', [

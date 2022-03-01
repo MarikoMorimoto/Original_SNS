@@ -24,9 +24,9 @@
             @endif
             <div class="row justify-content-center">
                 @if ($user->image !== '')
-                <img class="preview img-fluid col-9 col-md-7 mt-3" src="{{ \Storage::url($user->image) }}">
+                    <img class="img-fluid col-9 col-md-7 mt-3" src="{{ \Storage::url($user->image) }}">
                 @else
-                <img class="preview img-fluid col-9 col-md-7 mt-3" src="{{ asset('images/profile_icon.png') }}">
+                    <img class="img-fluid col-9 col-md-7 mt-3" src="{{ asset('images/profile_icon.png') }}">
                 @endif
             </div>
             <form class="mt-3" action="{{ route('users.edit_image') }}">
@@ -34,8 +34,17 @@
                     <input type="submit" class="btn btn-light btn-outline-secondary" value="プロフィール画像を変更">
                 </div>
             </form>
-            <div class="border-bottom p-2  mt-3">
-                {{ $user->name }}
+            <div class="border-bottom p-2 mt-3 d-flex">
+                <div class="avatar align-self-center">
+                    @if ($user->image !== '')
+                        <img class="" src="{{ \Storage::url($user->image) }}" alt="avatar">
+                    @else
+                        <img class="" src="{{ asset('images/profile_icon.png') }}" alt="avatar">
+                    @endif
+                </div>
+                <div class="ml-2 align-self-center">
+                    {{ $user->name }}
+                </div>
             </div>
             <div class="text-left border p-2 px-3 mt-3 mb-2">
                 @if ($user->profile !== '')
