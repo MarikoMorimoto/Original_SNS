@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             // nullable() でプロフィール作成時に無記入を許可
-            $table->string('profile')->nullable()->default('');
+            $table->string('profile', 200)->nullable()->default('');
             $table->string('image')->default('');
             $table->rememberToken();
             $table->timestamps();

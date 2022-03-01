@@ -54,7 +54,7 @@ Route::get('/logout/after', function () {
 });
 
 
-// 検索結果表示用ルート Route::resource('posts')より上に記述しないと、優先度が下がるため、エラーになる
+// 検索専用ページのルート Route::resource('posts')より上に記述しないと、優先度が下がるため、エラーになる
 Route::get('/posts/search', [PostsController::class, 'search'])->name('posts.search');
 
 Route::resource('posts', PostsController::class);
@@ -72,8 +72,22 @@ Route::resource('comments', CommentController::class)->only([
 
 Route::post('/comments/{id}', [CommentController::class, 'addComment'])->name('comments.add');
 
-Route::get('/user/exhibition/{id}', [UserController::class, 'exhibition'])->name('user.exhibition');
 
-Route::get('/user/profile', [UserController::class, 'exhibitions'])->name('user.profile');
+Route::get('/users/posts/{id}', [UserController::class, 'posts'])->name('users.posts');
+
+Route::get('/users/profile', [UserController::class, 'exhibitions'])->name('users.profile');
+
+Route::get('/users/edit', [UserController::class, 'edit'])->name('users.edit');
+
+Route::patch('/users/edit', [UserController::class, 'update'])->name('users.update');
+
+Route::get('/users/edit_image', [UserController::class, 'editImage'])->name('users.edit_image');
+
+Route::patch('/users/edit_image', [UserController::class, 'updateImage'])->name('users.update_image');
+
+Route::resource('users', UserController::class)->only([
+    'index', 'show',
+]);
+
 
 Route::post('/follow/ajax', [FollowController::class, 'ajaxFollows'])->name('follow.ajax');

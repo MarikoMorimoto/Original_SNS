@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostRequest extends FormRequest
+class UserImageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,9 @@ class PostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'max:20'],
-            'comment' => ['required', 'max:150'],
-            // 特定のテーブルのカラムを使用して存在チェック
-            'category_id' => ['required', 'exists:categories,id'],
             'image' => [
                 'required',
-                'file', // ファイルがアップロードされているか
+                'file',
                 'image',
                 'mimes:jpeg,jpg,png',
                 'dimensions:min_width=100,min_height=100,max_width=10000,max_height=10000',

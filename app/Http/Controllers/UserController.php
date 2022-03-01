@@ -5,14 +5,63 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
+use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserImageRequest;
+use App\Services\FileUploadService;
 
 class UserController extends Controller
 {
-    public function exhibition($id){
+    // ログインユーザー本人のみがアクセスできるマイページ
+    public function index(){
+        $user = \Auth::user();
+        return view('users.index');
+    }
+
+    // 誰でもアクセスできるユーザープロフィールページ
+    public function show($id){
+        $user = User::find($id);
+    }
+
+    // マイページの編集ページ
+    public function edit(){
+        $user = \Auth::user();
+        return view('users.edit');
+    }
+
+    // マイページの更新処理
+    public function update(UserRequest $request){
+        $user = \Auth::user();
+        if (empty($request->profile)) {
+            $request->profile = '';
+        }
+        $user->update([
+            'name' => $request->name,
+            'profile' => $request->profile,
+        ]);
+        session()->flash('status', 'プロフィールを更新しました!');
+        return redirect()->route('users.index');
+    }
+
+    public function editImage(){
+        $user = \Auth::user();
+        return view('users.edit_image');
+    }
+
+    public function updateImage(UserImageRequest $request, FileUploadService $service){
+        $user = \Auth::user();
+        $path = $service->saveImage($request->file('image'));
+        $user->update([
+            'image' => $path,
+        ]);
+        session()->flash('status', 'プロフィール画像を更新しました!');
+        return redirect()->route('users.index');
+    }
+
+    public function posts($id){
         $posts = Post::where('user_id', $id)->paginate(5);
         // dd(Post::find($id)->get()); NG すべてのid の posts が取得される
         $user_name = User::find($id)->name;
-        return view('user.exhibition', [
+        return view('users.posts', [
             'posts' => $posts,
             'user_name' => $user_name,
         ]);
