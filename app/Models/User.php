@@ -80,7 +80,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     // belongsToMany(モデルクラス名, 中間テーブル名, リレーションを設定する側のカラム名, リレーションを設定される側のカラム名);
     public function follow_users(){
-        return $this->belongsToMany(User::class, 'follows', 'user_id', 'follow_id');
+        return $this->belongsToMany(User::class, 'follows', 'user_id', 'follow_id')
+        // 中間テーブルに追加した時間で降順に並べ替え
+                    ->withPivot('created_at')
+                    ->orderBy('pivot_created_at', 'desc');
     }
 
     public function followers(){

@@ -91,3 +91,7 @@ Route::resource('users', UserController::class)->only([
 
 
 Route::post('/follow/ajax', [FollowController::class, 'ajaxFollows'])->name('follow.ajax');
+
+Route::resource('follow', FollowController::class)->only([
+    'index'
+]);

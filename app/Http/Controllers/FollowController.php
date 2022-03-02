@@ -9,6 +9,14 @@ use App\Http\Requests\AjaxFollowRequest;
 
 class FollowController extends Controller
 {
+    public function index(){
+        $user = \Auth::user();
+        $follow_users = $user->follow_users()->paginate(10);
+        return view('follow.index', [
+            'follow_users' => $follow_users,
+        ]);
+    }
+
     public function ajaxFollows(AjaxFollowRequest $request){
         $user = \Auth::user();
         $follow_user = User::find($request->follow_id);

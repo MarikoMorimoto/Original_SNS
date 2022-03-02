@@ -38,7 +38,7 @@
                 </p>
                 @endforelse
                 <div class="col-12 mt-3">
-                    {{ $posts->links() }}
+                    {{ $posts->appends(request()->query())->links() }}
                 </div>
             </div>
         </div>
