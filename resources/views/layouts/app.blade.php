@@ -85,7 +85,8 @@
                             <div class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
                                 <a href="{{ route('users.index') }}" class="dropdown-item">マイページトップ</a>
                                 <a href="{{ route('users.posts', $user->id ) }}" class="dropdown-item">{{ $user->name }}さんの投稿一覧</a>
-                                <a href="#" class="dropdown-item">mypage3</a>
+                                <a href="{{ route('follow.index') }}" class="dropdown-item">フォローしているユーザー一覧</a>
+                                <a href="{{ route('likes.index') }}" class="dropdown-item">いいね!! した投稿一覧</a>
                             </div>
                         </li>
                         <li class="nav-item">

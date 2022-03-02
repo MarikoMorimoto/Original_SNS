@@ -20,10 +20,12 @@ class UserController extends Controller
     // 誰でもアクセスできるユーザープロフィールページ
     public function show($id){
         $show_user = User::find($id);
-        $posts = Post::where('user_id', $id)->latest()->limit(3)->get();
+        $posts = Post::where('user_id', $id)->latest()->limit(1)->get();
+        $count_posts = Post::where('user_id', $id)->count();
         return view('users.show', [
             'show_user' => $show_user,
-            'posts' => $posts
+            'posts' => $posts,
+            'count_posts' => $count_posts 
         ]);
     }
 

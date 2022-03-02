@@ -62,27 +62,19 @@
                 --- ここより下の項目は他ユーザーからは見えません ---
             </p>
             <div class="row justify-content-center">
-                <ul class="col-12 col-md-10 col-lg-9 list-group list-group-flush">
+                <ul class="col-12 col-md-10 col-lg-9 list-group list-group-flush text-center">
                     <li class="list-group-item list-group-item-action cursor-pointer">
-                        <i class="fas fa-heart"> 未定</i>
+                        <a href="{{ route('users.posts', $user->id ) }}"><i class="fas fa-angle-right"> {{ $user->name }}さんの投稿一覧</i></a>
                     </li>
                     <li class="list-group-item list-group-item-action cursor-pointer">
-                        <i class="fas fa-heart"> 未定</i>
+                        <a href="{{ route('follow.index') }}"><i class="fas fa-angle-right"> フォローしているユーザー一覧</i>
                     </li>
                     <li class="list-group-item list-group-item-action cursor-pointer">
-                        <i class="fas fa-heart"> 未定</i>
-                    </li>
-                    <li class="list-group-item list-group-item-action cursor-pointer">
-                        <i class="fas fa-heart"> 未定</i>
+                        <a href="{{ route('likes.index') }}"><i class="fas fa-angle-right"> いいね!! した投稿一覧</i>
                     </li>
                 </ul>
 
             </div>
-
-            <a href="{{ route('likes.index') }}" class="">いいね!! した投稿一覧</a>
-            <a href="{{ route('users.posts', $user->id ) }}" class="">{{ $user->name }}さんの投稿一覧</a>
-            <a href="#" class="dropdown-item">mypage3</a>
-
 
         </div>
     </div>

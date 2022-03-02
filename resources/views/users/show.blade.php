@@ -45,6 +45,11 @@
             </div>
             <h2 class="mt-4">{{ $show_user->name }} さんの新着投稿</h2>
             <div class="row text-center mt-2">
+                @if ($count_posts > 0)
+                    <div class="col-12">
+                        <a href="{{ route('users.posts', $show_user->id ) }}">{{ $show_user->name }} さん の投稿一覧はこちら</a>
+                    </div>
+                @endif
                 @forelse ($posts as $post)
                     <div class="col-md-6 mt-3">
                         @if ($post->image !== '')
@@ -77,9 +82,9 @@
                     </div>
                     <div class="col-12 py-2 border-bottom"></div>
                 @empty
-                <p class="col-12 mt-3">
-                    投稿はありません。
-                </p>
+                    <p class="col-12 mt-3">
+                        投稿はありません。
+                    </p>
                 @endforelse
         </div>
     </div>
