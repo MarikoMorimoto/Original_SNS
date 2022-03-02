@@ -10,6 +10,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FollowController;
 use App\Models\Category;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,8 +26,13 @@ use App\Models\Category;
 Route::get('/', function () {
     $categories = Category::all();
     // dd($categories);
+    $posts = Post::all()->sortByDesc('created_at')->take(6);
+    $follow_users_ids = \Auth::user()->follow_users->pluck('id');
+    $follow_users_posts = Post::all()->whereIn('user_id', $follow_users_ids)->sortByDesc('created_at')->take(6);
     return view('home', [
-        'categories' => $categories
+        'categories' => $categories,
+        'posts' => $posts,
+        'follow_users_posts' => $follow_users_posts
     ]);
 });
 
