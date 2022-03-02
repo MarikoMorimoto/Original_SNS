@@ -27,8 +27,12 @@ Route::get('/', function () {
     $categories = Category::all();
     // dd($categories);
     $posts = Post::all()->sortByDesc('created_at')->take(6);
-    $follow_users_ids = \Auth::user()->follow_users->pluck('id');
-    $follow_users_posts = Post::all()->whereIn('user_id', $follow_users_ids)->sortByDesc('created_at')->take(6);
+    if (\Auth::user() !== null) {
+        $follow_users_ids = \Auth::user()->follow_users->pluck('id');
+        $follow_users_posts = Post::all()->whereIn('user_id', $follow_users_ids)->sortByDesc('created_at')->take(6);
+    } else {
+        $follow_users_posts = '';
+    }
     return view('home', [
         'categories' => $categories,
         'posts' => $posts,
