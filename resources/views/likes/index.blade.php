@@ -4,7 +4,7 @@
 <div class="container">
 <div class="row justify-content-center">
         <div class="col-md-11 col-lg-8">
-            <h2>いいねした投稿一覧</h2>
+            <h2>いいね!! した投稿一覧</h2>
             <p class="mt-1">いいね!! した時間が新しい順に並んでいます</p>
             <div class="row text-center mt-2">
                 @forelse ($posts as $post)

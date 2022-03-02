@@ -37,9 +37,9 @@
             <div class="border-bottom p-2 mt-3 d-flex">
                 <div class="avatar align-self-center">
                     @if ($user->image !== '')
-                        <img class="" src="{{ \Storage::url($user->image) }}" alt="avatar">
+                        <img src="{{ \Storage::url($user->image) }}" alt="avatar">
                     @else
-                        <img class="" src="{{ asset('images/profile_icon.png') }}" alt="avatar">
+                        <img src="{{ asset('images/profile_icon.png') }}" alt="avatar">
                     @endif
                 </div>
                 <div class="ml-2 align-self-center">
