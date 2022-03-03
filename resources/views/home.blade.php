@@ -135,7 +135,7 @@
                         </p>
                     @endforelse
                     <div class="col-12 text-center mt-1">
-                        <a href="{{ route('follow.index') }}" class="btn btn-light btn-outline-secondary col-md-8">フォローユーザーの投稿をもっと見る</a>
+                        <a href="{{ route('follow.posts') }}" class="btn btn-light btn-outline-secondary col-md-8">フォローユーザーの投稿をもっと見る</a>
                     </div>   
                 </div>
             </div>

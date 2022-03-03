@@ -99,6 +99,7 @@ Route::resource('users', UserController::class)->only([
     'index', 'show',
 ]);
 
+Route::get('/follow/posts', [FollowController::class, 'posts'])->name('follow.posts');
 
 Route::post('/follow/ajax', [FollowController::class, 'ajaxFollows'])->name('follow.ajax');
 
