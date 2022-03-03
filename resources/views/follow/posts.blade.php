@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-11 col-lg-8">
-            <h2>フォローしているユーザーの投稿一覧</h2>
+            <h2>フォローユーザーの投稿一覧</h2>
             <div class="row text-center mt-2">
 
                 @forelse ($posts as $post)
