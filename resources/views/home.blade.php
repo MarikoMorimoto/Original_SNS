@@ -84,7 +84,11 @@
             </div>
         </div>
         <div class="col-lg-9 col-12">
-            <h2><i class="fas fa-camera fa-lg"></i> 新着投稿</h2>
+            <h2 class="d-flex"><i class="fas fa-camera fa-lg"></i><span class="ml-1">新着投稿</span>
+                @auth
+                    <div class="margin-left-auto"><a href="{{ route('posts.create') }}"><i class="fas fa-plus fa-lg"></i> 投稿する</a></div>
+                @endauth
+            </h2>
             <div class="row my-3">
                 @forelse ($posts as $post)
                     <div class="col-md-4 col-6 mb-3">
@@ -103,6 +107,9 @@
                         投稿がありません
                     </p>
                 @endforelse
+                <div class="col-12 text-center mt-1">
+                    <a href="{{ route('posts.index') }}" class="btn btn-light btn-outline-secondary col-md-8">投稿をもっと見る</a>
+                </div>
             </div>
         </div>
         <!-- ログインユーザーにのみ表示 -->
@@ -127,29 +134,29 @@
                             投稿がありません
                         </p>
                     @endforelse
-                        </div>
+                    <div class="col-12 text-center mt-1">
+                        <a href="{{ route('follow.posts') }}" class="btn btn-light btn-outline-secondary col-md-8">フォローユーザーの投稿をもっと見る</a>
+                    </div>   
                 </div>
             </div>
         @endauth
         <!-- mdサイズ以下の時 フォローユーザーの投稿一覧の下に表示 -->
-        <div class="col-12">
-            <div class="d-lg-none d-block">
-                <h2><i class="far fa-thumbs-up fa-lg"></i> カテゴリ別画像</h2>
-                <div class="row my-3">
-                    @foreach ($categories as $category)
-                        <div class="col-4">
-                            <a class="btn btn-outline-secondary w-100 carsor-pointer my-2"
-                                href="#"
-                                onclick="event.preventDefault();
-                                    document.getElementById('category-input-2').setAttribute('value', '{{ $category->name}}' );
-                                    document.getElementById('category-form-2').submit();">{{ $category->name }}
-                            </a>
-                            <form id="category-form-2" action="{{ route('posts.index') }}" class="d-none">
-                                <input id="category-input-2" type="hidden" name="keyword">
-                            </form>
-                        </div>
-                    @endforeach
-                </div>
+        <div class="col-12 d-lg-none d-block">
+            <h2><i class="far fa-thumbs-up fa-lg"></i> カテゴリ別画像</h2>
+            <div class="row my-3">
+                @foreach ($categories as $category)
+                    <div class="col-4">
+                        <a class="btn btn-outline-secondary w-100 carsor-pointer my-2"
+                            href="#"
+                            onclick="event.preventDefault();
+                                document.getElementById('category-input-2').setAttribute('value', '{{ $category->name}}' );
+                                document.getElementById('category-form-2').submit();">{{ $category->name }}
+                        </a>
+                        <form id="category-form-2" action="{{ route('posts.index') }}" class="d-none">
+                            <input id="category-input-2" type="hidden" name="keyword">
+                        </form>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>

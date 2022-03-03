@@ -26,6 +26,10 @@ h2 {
     border-bottom: solid 1.5px #666666;
 }
 
+.margin-left-auto {
+    margin-left: auto;
+}
+
 .list-group-item {
     border: dashed 1px #777777;
 }
