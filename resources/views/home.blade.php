@@ -107,6 +107,9 @@
                         投稿がありません
                     </p>
                 @endforelse
+                <div class="col-12 text-center mt-1">
+                    <a href="{{ route('posts.index') }}" class="btn btn-light btn-outline-secondary col-md-8">投稿をもっと見る</a>
+                </div>
             </div>
         </div>
         <!-- ログインユーザーにのみ表示 -->
@@ -131,12 +134,14 @@
                             投稿がありません
                         </p>
                     @endforelse
-                        </div>
+                    <div class="col-12 text-center mt-1">
+                        <a href="{{ route('follow.index') }}" class="btn btn-light btn-outline-secondary col-md-8">フォローユーザーの投稿をもっと見る</a>
+                    </div>   
                 </div>
             </div>
         @endauth
         <!-- mdサイズ以下の時 フォローユーザーの投稿一覧の下に表示 -->
-        <div class="col-12 d-lg-none d-block px-0">
+        <div class="col-12 d-lg-none d-block">
             <h2><i class="far fa-thumbs-up fa-lg"></i> カテゴリ別画像</h2>
             <div class="row my-3">
                 @foreach ($categories as $category)
