@@ -10,6 +10,10 @@ use App\Http\Requests\AjaxFollowRequest;
 
 class FollowController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function index(){
         $user = \Auth::user();
         $follow_users = $user->follow_users()->paginate(10);
