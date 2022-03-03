@@ -11,6 +11,13 @@ use App\Services\FileUploadService;
 
 class UserController extends Controller
 {
+    public function __construct(){
+        // only 指定したコントローラメソッドにミドルウェアを設定
+        // except 指定したコントローラメソッドにはミドルウェアが設定されない
+        $this->middleware('auth')
+            ->only(['index', 'edit', 'update', 'editImage', 'updateImage']);
+    }
+
     // ログインユーザー本人のみがアクセスできるマイページ
     public function index(){
         $user = \Auth::user();

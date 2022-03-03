@@ -85,8 +85,6 @@ Route::post('/comments/{id}', [CommentController::class, 'addComment'])->name('c
 
 Route::get('/users/posts/{id}', [UserController::class, 'posts'])->name('users.posts');
 
-Route::get('/users/profile', [UserController::class, 'exhibitions'])->name('users.profile');
-
 Route::get('/users/edit', [UserController::class, 'edit'])->name('users.edit');
 
 Route::patch('/users/edit', [UserController::class, 'update'])->name('users.update');

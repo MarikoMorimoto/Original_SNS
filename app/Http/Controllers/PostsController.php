@@ -14,11 +14,11 @@ use App\Services\FileUploadService;
 
 class PostsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct(){
+        $this->middleware('auth')
+            ->only(['create','store', 'edit', 'update', 'destroy']);
+    }
+
     public function index(Request $request)
     {
         // ->input() ビュー側の <input name="keyword"> と紐づけ
