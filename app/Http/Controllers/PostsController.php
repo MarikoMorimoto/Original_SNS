@@ -159,7 +159,7 @@ class PostsController extends Controller
             'title' => $request->title,
             'image' => $path
         ]);
-        session()->flash('画像を変更しました!');
+        session()->flash('status', '画像を変更しました!');
         return redirect()->route('posts.show', [
             'post' => $post,
             'comments' => $comments,
@@ -168,7 +168,10 @@ class PostsController extends Controller
 
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+        session()->flash('status', '投稿を削除しました');
+        return redirect()->route('home');
     }
 
     public function search(){
