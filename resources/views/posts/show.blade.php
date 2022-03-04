@@ -56,6 +56,14 @@
                     <div class="col-12 py-2 text-right py-3">
                         カテゴリー : {{ $post->category->name}}<br>
                         {{ $post->created_at }}
+                        @auth
+                            @if ($post->user->id === $user->id)
+                                <form method="post" action="{{ route('posts.edit', $post) }}">
+                                    @csrf
+                                    <input type="submit" class="btn btn-light btn-outline-secondary" value="投稿を編集"> 
+                                </form>
+                            @endif
+                        @endauth
                     </div>
                     <div class="col-12 text-left d-flex">
                         <div class="avatar align-self-center">
