@@ -49,11 +49,15 @@ Auth::routes(['verify' => true]);
 Route::middleware(['verified'])->group(function(){
     // メール確認済みのverifiedユーザー以外は
     // ここに記載した各ルートにアクセスできなくなる
-    Route::resource('about', AboutController::class)->only([
-        'index'
-    ]);
-
+    // posts.create を設定する予定
+    // Route::resource('posts', PostsController::class)->only([
+    //     'create'
+    // ]);
 });
+
+Route::resource('about', AboutController::class)->only([
+    'index'
+]);
 
 Route::get('/register/after', function () {
     return view('auth.after_register');
