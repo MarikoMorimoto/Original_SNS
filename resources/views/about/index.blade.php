@@ -34,7 +34,7 @@
             @guest
                 <div class="col-12 text-center mb-3">
                     <a class="btn btn-outline-info " href="{{ route('register') }}">
-                        {{ '会員登録はこちらから' }}
+                        会員登録はこちらから
                     </a>
                 </div>
             @endguest
@@ -42,6 +42,12 @@
                 当サイトを、花の画像であふれる素敵な場所にするためのお力添えを、どうぞよろしくお願いします。
             </p>
             <p class="text-right">2022.03.04 Flowers管理者より</p>
+            <div class="col-12 text-center mb-3">
+                <a class="btn btn-outline-info " href="{{ route('contact.index') }}">
+                    お問い合わせはこちらから
+                </a>
+            </div>
+
         </div>
     </div>
 </div>

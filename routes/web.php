@@ -9,6 +9,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\ContactController;
 use App\Models\Category;
 use App\Models\Post;
 
@@ -117,3 +118,11 @@ Route::post('/follow/ajax', [FollowController::class, 'ajaxFollows'])->name('fol
 Route::resource('follow', FollowController::class)->only([
     'index'
 ]);
+
+
+// お問い合わせページ
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+
+Route::post('/contact/confirm', [ContactController::class, 'confirm'])->name('contact.confirm');
+
+Route::post('/contact/thanks', [ContactController::class, 'send'])->name('contact.send');
