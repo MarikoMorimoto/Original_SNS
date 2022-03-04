@@ -67,7 +67,16 @@ Route::get('/logout/after', function () {
 // 検索専用ページのルート Route::resource('posts')より上に記述しないと、優先度が下がるため、エラーになる
 Route::get('/posts/search', [PostsController::class, 'search'])->name('posts.search');
 
-Route::resource('posts', PostsController::class);
+// resource を用いると edit がGETメソッドでアクセスできるようになる。POSTメソッドでのアクセスにした方がよいと思ったため個別でルーティング
+Route::post('/posts/edit/{id}', [PostsController::class, 'edit'])->name('posts.edit');
+
+Route::post('/posts/edit_image/{id}', [PostsController::class, 'editImage'])->name('posts.edit_image');
+
+Route::patch('posts/edit_image/{id}', [PostsController::class, 'updateImage'])->name('posts.update_image');
+
+Route::resource('posts', PostsController::class)->except([
+    'edit'
+]);
 
 Route::resource('likes', LikeController::class)->only([
     'index'
