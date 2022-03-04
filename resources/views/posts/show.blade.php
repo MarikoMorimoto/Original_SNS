@@ -144,7 +144,7 @@
                                                 @csrf
                                                 @method('delete')
                                                 <div class="text-right">
-                                                    <input type="submit" class="btn btn-light btn-outline-secondary" value="コメントを削除">
+                                                    <input type="submit" class="delete btn btn-outline-danger" value="コメントを削除">
                                                 </div>
                                             </form>
                                         @endif
@@ -169,6 +169,17 @@
     </div>
 </div>
 <script>
+    // 削除ボタンがクリックされたとき、ダイアログを表示
+    $('.delete').on('click', function(){
+        // confirmメソッド ダイアログに表示するメッセージを指定することができる
+        let checked = confirm('本当にコメントを削除しますか？削除後は、コメントを元には戻せません。');
+        if (checked == true) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+
     $('.count_comment').on('input', function(){
         let count = $(this).val().replace(/\n/g, "\r\n").length;
         $('.now_count_comment').text(count);

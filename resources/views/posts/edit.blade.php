@@ -71,25 +71,33 @@
                     </select>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-md-12 text-right">
+                    <div class="col-12 text-right">
                         <input class="submit btn btn-light btn-outline-secondary" type="submit" value="更新する">
                     </div>
                 </div>
+            </form>
+            <form method="POST" action="{{ route('posts.destroy', $post) }}">
+                @csrf
+                @method('delete')
+                    <div class="row mt-3">
+                        <div class="col-12 text-right">
+                            <input class="delete btn btn-outline-danger" type="submit" value="投稿を削除する">
+                        </div>
+                    </div>
             </form>  
         </div>
     </div>
 </div>
 <script>
-    // 選択した画像のプレビュー表示
-    $('input[type=file]').on('change', function(e){
-        // 画像ファイルの読み込みクラス
-        let reader = new FileReader();
-        reader.onload = function(e){
-            // src属性に選択した画像ファイルの情報を設定
-            $('.preview').attr('src', e.target.result);
+    // 削除ボタンがクリックされたとき、ダイアログを表示
+    $('.delete').on('click', function(){
+        // confirmメソッド ダイアログに表示するメッセージを指定することができる
+        let checked = confirm('本当に投稿を削除しますか？削除後は、投稿を元には戻せません。');
+        if (checked == true) {
+            return true;
+        } else {
+            return false;
         }
-        // 読み込んだ画像ファイルをURLに変換
-        reader.readAsDataURL(e.target.files[0]);
     });
 
     $('.count_title').on('input', function(){
