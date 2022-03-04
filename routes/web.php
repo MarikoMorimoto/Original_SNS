@@ -72,7 +72,7 @@ Route::post('/posts/edit/{id}', [PostsController::class, 'edit'])->name('posts.e
 
 Route::post('/posts/edit_image/{id}', [PostsController::class, 'editImage'])->name('posts.edit_image');
 
-Route::patch('posts/edit_image/{id}', [PostsController::class, 'updateImage'])->name('posts.update_image');
+Route::patch('/posts/edit_image/{id}', [PostsController::class, 'updateImage'])->name('posts.update_image');
 
 Route::resource('posts', PostsController::class)->except([
     'edit'

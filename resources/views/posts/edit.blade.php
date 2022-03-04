@@ -22,6 +22,7 @@
                         <img class="img-fluid" src="{{ asset('images/no_image.png') }}" alt="no_image">
                     @endif        
                     <form class="mt-2 text-right" method="POST" action="{{ route('posts.edit_image', $post) }}">
+                        @csrf
                         <input type="submit" class="btn btn-light btn-outline-secondary" value="画像を変更する"> 
                     </form>
                 </div>
@@ -42,7 +43,6 @@
             
                 <div class="form-group form-row">
                     <label for="comment" class="col-md-2 col-form-label">コメント</label>
-                    {{-- 改行を有効にしつつ、エスケープする --}}
                     <div class="col-md-10">
                         <textarea class="form-control count_comment" id="comment" name="comment" placeholder="画像についてコメントを入力してください" rows="10">{{ $post->comment }}</textarea>
                         <div>

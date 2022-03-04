@@ -11,10 +11,13 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Post;
 use App\Models\User;
 use App\Services\FileUploadService;
+use App\Http\Requests\PostEditRequest;
+use App\Http\Requests\PostEditImageRequest;
 
 class PostsController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth')
             ->only(['create','store', 'edit', 'update', 'destroy']);
     }
@@ -79,11 +82,6 @@ class PostsController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('posts.create', [
@@ -91,12 +89,6 @@ class PostsController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(PostRequest $request, FileUploadService $service)
     {
         $path = $service->saveImage($request->file('image'));
@@ -112,12 +104,6 @@ class PostsController extends Controller
         return redirect()->route('home');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $post = Post::find($id);
@@ -137,9 +123,47 @@ class PostsController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(PostEditRequest $request, $id)
     {
-        //
+        $post = Post::find($id);
+        $comments = $post->commentsToPost()->orderBy('created_at', 'desc')->paginate(3);
+        $post->update([
+            'title' => $request->title,
+            'comment' => $request->comment,
+            'category_id' => $request->category_id
+        ]);
+        session()->flash('status', '投稿を編集しました!');
+        return redirect()->route('posts.show', [
+            'post' => $post,
+            'comments' => $comments
+        ]);
+    }
+
+    public function editImage($id)
+    {
+        $post = Post::find($id);
+        return view('posts.edit_image', [
+            'post' => $post
+        ]);
+    }
+
+    public function updateImage(PostEditImageRequest $request, FileUploadService $service, $id)
+    {
+        // dd($request);
+        $path = $service->saveImage($request->file('image'));
+
+        $post = Post::find($id);
+        $comments = $post->commentsToPost()->orderBy('created_at', 'desc')->paginate(3);
+
+        $post->update([
+            'title' => $request->title,
+            'image' => $path
+        ]);
+        session()->flash('画像を変更しました!');
+        return redirect()->route('posts.show', [
+            'post' => $post,
+            'comments' => $comments,
+        ]);
     }
 
     public function destroy($id)
