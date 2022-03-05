@@ -70,9 +70,15 @@
                     <select id="category" class="col-md-6" name="category_id">
                         <option value="">選択してください</option>
                         @forelse ($categories as $category)
+                            @if ($category->id == old('category_id'))
+                                <option value="{{ $category->id }}" selected>
+                                    {{ $category->name }}
+                                </option>
+                            @else
                             <option value="{{ $category->id }}">
                                 {{ $category->name }}
                             </option>
+                            @endif
                         @empty
                             カテゴリーは未設定です
                         @endforelse
