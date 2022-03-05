@@ -117,10 +117,15 @@ class PostsController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
-        return view('posts.edit', [
-            'post' => $post,
-            'categories' => DB::table('categories')->get(),
-        ]);
+        // 投稿したユーザー以外がURL直打ちなどでアクセスしようとした場合は条件分岐でwarningページに遷移
+        if ($post->user_id === \Auth::user()->id) {
+            return view('posts.edit', [
+                'post' => $post,
+                'categories' => DB::table('categories')->get(),
+            ]);
+        } else {
+            return view('posts.warning');
+        };
     }
 
     public function update(PostEditRequest $request, $id)
@@ -142,9 +147,13 @@ class PostsController extends Controller
     public function editImage($id)
     {
         $post = Post::find($id);
-        return view('posts.edit_image', [
-            'post' => $post
-        ]);
+        if ($post->user_id === \Auth::user()->id) {
+            return view('posts.edit_image', [
+                'post' => $post
+            ]);
+        } else {
+            return view('posts.warning');
+        };
     }
 
     public function updateImage(PostEditImageRequest $request, FileUploadService $service, $id)
@@ -156,7 +165,6 @@ class PostsController extends Controller
         $comments = $post->commentsToPost()->orderBy('created_at', 'desc')->paginate(3);
 
         $post->update([
-            'title' => $request->title,
             'image' => $path
         ]);
         session()->flash('status', '画像を変更しました!');
@@ -176,5 +184,9 @@ class PostsController extends Controller
 
     public function search(){
         return view('posts.search');
+    }
+
+    public function warning(){
+        return view('posts.warning');
     }
 }

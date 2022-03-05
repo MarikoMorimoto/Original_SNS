@@ -37,8 +37,7 @@
                             {{ $post->created_at }}
                             @auth
                                 @if ($post->user->id === $user->id)
-                                    <form method="post" action="{{ route('posts.edit', $post) }}">
-                                        @csrf
+                                    <form action="{{ route('posts.edit', $post) }}">
                                         <input type="submit" class="btn btn-light btn-outline-secondary" value="投稿を編集"> 
                                     </form>
                                 @endif

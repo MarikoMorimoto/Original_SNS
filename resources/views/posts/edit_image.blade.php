@@ -27,16 +27,12 @@
                         <img class="preview img-fluid" src="{{ asset('images/no_image.png') }}" alt="preview">
                     @endif                            
                     <span class="pl-1 mt-2">
-                        <input type="file" name="image" class="form-control-file" value="{{ old('image') }}">
+                        <input type="file" name="image" class="form-control-file">
                     </span>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12 text-right">
                         <input class="submit btn btn-light btn-outline-secondary" type="submit" value="更新する">
-                        <div class="text-danger">
-                            正しい画像ファイルが選択されていることを確認したあと、<br>
-                            更新ボタンを押してください。
-                        </div>
                     </div>
                 </div>
             </form>

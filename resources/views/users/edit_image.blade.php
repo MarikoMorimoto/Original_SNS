@@ -27,7 +27,7 @@
                         <img class="preview img-fluid col-9 col-md-7" src="{{ asset('images/profile_icon.png') }}">
                     @endif
                     <span class="pl-1 m-4">
-                        <input type="file" name="image" class="form-control-file" value="{{ old('image') }}">
+                        <input type="file" name="image" class="form-control-file">
                     </span>
                 </div>
                 <div class="text-right mt-4">

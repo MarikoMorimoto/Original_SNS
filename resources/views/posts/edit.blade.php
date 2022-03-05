@@ -13,8 +13,7 @@
                     @else
                         <img class="img-fluid" src="{{ asset('images/no_image.png') }}" alt="no_image">
                     @endif        
-                    <form class="mt-2 text-right" method="POST" action="{{ route('posts.edit_image', $post) }}">
-                        @csrf
+                    <form class="mt-2 text-right" action="{{ route('posts.edit_image', $post) }}">
                         <input type="submit" class="btn btn-light btn-outline-secondary" value="画像を変更する"> 
                     </form>
                 </div>

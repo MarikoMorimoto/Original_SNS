@@ -76,16 +76,17 @@ Route::get('/logout/after', function () {
 // 検索専用ページのルート Route::resource('posts')より上に記述しないと、優先度が下がるため、エラーになる
 Route::get('/posts/search', [PostsController::class, 'search'])->name('posts.search');
 
-// resource を用いると edit がGETメソッドでアクセスできるようになる。POSTメソッドでのアクセスにした方がよいと思ったため個別でルーティング
-Route::post('/posts/edit/{id}', [PostsController::class, 'edit'])->name('posts.edit');
+// resource を用いると edit がGETメソッドでアクセスできるようになる。POSTメソッドでのアクセスにした方がよいのでは？
+// ↑と思っていたが、バリデーションエラー時の処理は、「ひとつ前のURLに G E T で リダイレクト」！！
+// そのためバリデーションエラーが発生する可能性がある編集ページなどはGETで作成する必要がある
 
-Route::post('/posts/edit_image/{id}', [PostsController::class, 'editImage'])->name('posts.edit_image');
+Route::get('/posts/edit_image/{id}', [PostsController::class, 'editImage'])->name('posts.edit_image');
 
 Route::patch('/posts/edit_image/{id}', [PostsController::class, 'updateImage'])->name('posts.update_image');
 
-Route::resource('posts', PostsController::class)->except([
-    'edit'
-]);
+Route::get('/posts/warning', [PostsController::class, 'warning'])->name('posts.warning');
+
+Route::resource('posts', PostsController::class);
 
 Route::resource('likes', LikeController::class)->only([
     'index'

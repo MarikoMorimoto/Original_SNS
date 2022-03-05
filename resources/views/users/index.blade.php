@@ -62,21 +62,22 @@
                 --- ここより下の項目は他ユーザーからは見えません ---
             </p>
             <div class="row justify-content-center">
-                <ul class="col-12 col-md-10 col-lg-9 list-group list-group-flush text-center">
-                    <li class="list-group-item list-group-item-action cursor-pointer">
-                        <a href="{{ route('users.posts', $user->id ) }}"><i class="fas fa-angle-right"> {{ $user->name }} さんの投稿一覧</i></a>
-                    </li>
-                    <li class="list-group-item list-group-item-action cursor-pointer">
-                        <a href="{{ route('likes.index') }}"><i class="fas fa-angle-right"> いいね!! した投稿一覧</i>
-                    </li>
-                    <li class="list-group-item list-group-item-action cursor-pointer">
-                        <a href="{{ route('follow.index') }}"><i class="fas fa-angle-right"> フォローしているユーザー一覧</i>
-                    </li>
-                    <li class="list-group-item list-group-item-action cursor-pointer">
-                        <a href="{{ route('follow.posts') }}"><i class="fas fa-angle-right"> フォローユーザーの投稿一覧</i>
-                    </li>                    
-                </ul>
-
+                <div class="col-12 col-md-10 col-lg-9">
+                    <ul class="list-group list-group-flush text-center">
+                        <li class="list-group-item list-group-item-action cursor-pointer">
+                            <a href="{{ route('users.posts', $user->id ) }}"><i class="fas fa-angle-right"><span class="ml-2 mr-2">{{ $user->name }} さんの投稿一覧</span></i><i class="fas fa-angle-left"></i></a>
+                        </li>
+                        <li class="list-group-item list-group-item-action cursor-pointer">
+                            <a href="{{ route('likes.index') }}"><i class="fas fa-angle-right"><span class="ml-2 mr-2">いいね!! した投稿一覧</span></i><i class="fas fa-angle-left"></i>
+                        </li>
+                        <li class="list-group-item list-group-item-action cursor-pointer">
+                            <a href="{{ route('follow.index') }}"><i class="fas fa-angle-right"><span class="ml-2 mr-2">フォローしているユーザー一覧</span></i><i class="fas fa-angle-left"></i>
+                        </li>
+                        <li class="list-group-item list-group-item-action cursor-pointer">
+                            <a href="{{ route('follow.posts') }}"><i class="fas fa-angle-right"><span class="ml-2 mr-2">フォローユーザーの投稿一覧</span></i><i class="fas fa-angle-left"></i>
+                        </li>                    
+                    </ul>
+                </div>
             </div>
 
         </div>
