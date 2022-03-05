@@ -5,26 +5,24 @@
     <div class="row justify-content-center">
         <div class="col-md-11 col-lg-8">
             <h2>{{ $user->name }} さん のプロフィール</h2>
-            {{-- エラーメッセージを出力 --}}
-            {{-- Laravelでは、バリデーションの実施時にチェックに引っかかった値があると
-                自動的に$errors という変数に、エラーメッセージを準備する。
-                なお、この$errors はViewErrorBag型という特殊なデータ型のため
-                以下のように記述することで配列のように扱うことが可能。--}}
 
-            @foreach($errors->all() as $error)
-                <p class="error text-danger">{{ $error }}</p>
-            @endforeach
             <form method="POST" class="mt-3" action="{{ route('users.update') }}">
                 @csrf
                 @method('patch')
                 <div class="form-group form-row">
                     <label for="user_name" class="col-md-2 col-form-label">お名前</label>
                     <div class="col-md-10">
-                        <input class="form-control count_name" id="user_name" type="text" name="name" placeholder="お名前を入力してください" value="{{ $user->name }}">
+                        <input class="form-control count_name @error('name') is-invalid @enderror" id="user_name" type="text" name="name" placeholder="お名前を入力してください" value="{{ $user->name }}">
                         <div>
                             <span class="now_count_name">0</span> / 20 文字
                         </div>
                         <span class="over_count_name"></span>
+                        @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
                     </div>
                 </div>
                 
@@ -32,15 +30,21 @@
                     <label for="profile" class="col-md-2 col-form-profile">プロフィール</label>
                     {{-- 改行を有効にしつつ、エスケープする --}}
                     <div class="col-md-10">
-                        <textarea class="form-control count_profile" id="profile" name="profile" placeholder="自己紹介文などをご自由に入力してください" rows="10">{{ $user->profile }}</textarea>
+                        <textarea class="form-control count_profile @error('profile') is-invalid @enderror" id="profile" name="profile" placeholder="自己紹介文などをご自由に入力してください" rows="10">{{ $user->profile }}</textarea>
                         <div>
                             <span class="now_count_profile">0</span> / 200 文字
                         </div>
                         <span class="over_count_profile"></span>
+                        @error('profile')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
                     </div>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-12">
+                    <div class="col-12 text-right">
                         <input class="submit btn btn-light btn-outline-secondary" type="submit" value="プロフィールを更新する">
                     </div>
                 </div>

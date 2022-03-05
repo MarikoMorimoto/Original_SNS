@@ -4,17 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-11 col-lg-8">
-            <h2>新規投稿</h2>
-            {{-- エラーメッセージを出力 --}}
-            {{-- Laravelでは、バリデーションの実施時にチェックに引っかかった値があると
-                自動的に$errors という変数に、エラーメッセージを準備する。
-                なお、この$errors はViewErrorBag型という特殊なデータ型のため
-                以下のように記述することで配列のように扱うことが可能。--}}
-
-            @foreach($errors->all() as $error)
-                <p class="error text-danger">{{ $error }}</p>
-            @endforeach
-            
+            <h2>新規投稿</h2>            
             {{-- 画像データ送信のため enctype を設定 --}}
             <form
             class="mt-3"
@@ -30,28 +20,48 @@
                     <span class="pl-1 mt-2">
                         <input type="file" name="image" class="form-control-file" value="{{ old('image') }}">
                     </span>
+                    
                 </div>
+                @if ($errors->has('image'))
+                    <div class="text-danger small mb-3" role="alert">
+                        <strong>
+                            @foreach($errors->get('image') as $message)
+                                {{ $message }}
+                            @endforeach
+                        </strong>
+                    </div>
+                @endif
                 <div class="form-group form-row">
                     <label for="title" class="col-md-2 col-form-label">タイトル</label>
-                    {{-- old()という関数を使えばエラーの際に入力した値がクリアされない --}}
                     <div class="col-md-10">
-                        <input class="form-control count_title" id="title" type="text" name="title" placeholder="画像のタイトルを入力してください" value="{{ old('title') }}">
+                        <input class="form-control count_title @error('title') is-invalid @enderror" id="title" type="text" name="title" placeholder="画像のタイトルを入力してください" value="{{ old('title') }}">
                         <div>
                             <span class="now_count_title">0</span> / 20 文字
                         </div>
                         <span class="over_count_title"></span>
+                        @error('title')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
                     </div>
                 </div>
                 
                 <div class="form-group form-row">
                     <label for="comment" class="col-md-2 col-form-label">コメント</label>
-                    {{-- 改行を有効にしつつ、エスケープする --}}
                     <div class="col-md-10">
-                        <textarea class="form-control count_comment" id="comment" name="comment" placeholder="画像についてコメントを入力してください" rows="10">{{ old('comment') }}</textarea>
+                        <textarea class="form-control count_comment @error('comment') is-invalid @enderror" id="comment" name="comment" placeholder="画像についてコメントを入力してください" rows="10">{{ old('comment') }}</textarea>
                         <div>
                             <span class="now_count_comment">0</span> / 150 文字
                         </div>
                         <span class="over_count_comment"></span>
+                        @error('comment')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
                     </div>
                 </div>
                 
@@ -68,6 +78,15 @@
                         @endforelse
                     </select>
                 </div>
+                @if ($errors->has('category_id'))
+                    <div class="text-danger small mt-2 offset-md-2" role="alert">
+                        <strong>
+                            @foreach($errors->get('category_id') as $message)
+                                {{ $message }}
+                            @endforeach
+                        </strong>
+                    </div>
+                @endif
                 <div class="row mt-4">
                     <div class="col-md-12 text-right">
                         <input class="submit btn btn-light btn-outline-secondary" type="submit" value="投稿する">

@@ -5,11 +5,6 @@
     <div class="row justify-content-center">
         <div class="col-md-11 col-lg-8">
             <h2>{{ $user->name }} さん のプロフィール画像</h2>
-                {{-- エラーメッセージを出力 --}}
-                {{-- Laravelでは、バリデーションの実施時にチェックに引っかかった値があると
-                    自動的に$errors という変数に、エラーメッセージを準備する。
-                    なお、この$errors はViewErrorBag型という特殊なデータ型のため
-                    以下のように記述することで配列のように扱うことが可能。--}}
 
             @foreach($errors->all() as $error)
             <p class="error text-danger">{{ $error }}</p>

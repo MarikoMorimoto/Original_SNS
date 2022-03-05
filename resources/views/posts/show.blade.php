@@ -5,9 +5,6 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <h2>投稿詳細</h2>
-            @foreach($errors->all() as $error)
-            <p class="error text-danger">{{ $error }}</p>
-            @endforeach
 
             <!-- セッションにフラッシュメッセージがセットされている時だけ表示 -->
             @if (session('status'))
@@ -104,11 +101,17 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="comment">この投稿について感想など、コメントを追加しませんか？</label>
-                                    <textarea class="form-control count_comment" id="comment" name="comment" placeholder="コメントを入力" rows="2">{{ (old('comment')) }}</textarea>
+                                    <textarea class="form-control count_comment @error('comment') is-invalid @enderror" id="comment" name="comment" placeholder="コメントを入力" rows="2">{{ (old('comment')) }}</textarea>
                                     <div>
                                         <span class="now_count_comment">0</span> / 150 文字
                                     </div>
                                     <span class="over_count_comment"></span>
+                                    @error('comment')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
                                 </div>
                                 <input class="submit btn btn-light btn-outline-secondary" type="submit" value="コメントを追加">
                             </form>
