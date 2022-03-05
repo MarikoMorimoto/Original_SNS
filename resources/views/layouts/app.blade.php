@@ -113,5 +113,17 @@
             @yield('content')
         </main>
     </div>
+    <!-- フッター -->
+    <div class="footer container-fluid text-center">
+        <ul class="list-unstyled d-md-flex justify-content-center pt-3">
+            <li class="p-2"><a href="{{ route('about.index') }}" class="text-secondary">当サイトについて</a></li>
+            <li class="p-2"><a href="{{ route('about.rule') }}" class="text-secondary">利用規約</a></li>
+            <li class="p-2"><a href="{{ route('about.privacy') }}" class="text-secondary">プライバシーポリシー</a></li>
+            <li class="p-2"><a href="{{ route('contact.index') }}" class="text-secondary">お問い合わせ</a></li>
+        </ul>
+        <div class="pb-5">
+            <small class="">Copyright&copy; 2022 Flowers All Rights Reserved.</small>
+        </div>
+    </div>
 </body>
 </html>

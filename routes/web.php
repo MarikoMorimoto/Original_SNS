@@ -56,6 +56,10 @@ Route::middleware(['verified'])->group(function(){
     // ]);
 });
 
+Route::get('/about/rule', [AboutController::class, 'rule'])->name('about.rule');
+
+Route::get('/about/privacy', [AboutController::class, 'privacy'])->name('about.privacy');
+
 Route::resource('about', AboutController::class)->only([
     'index'
 ]);

@@ -51,6 +51,12 @@ h2 {
     object-fit: cover;
 }
 
+/* フッター */
+.footer {
+    background-color: rgb(253, 245, 247);
+    opacity: 0.9;
+}
+
 /* アバター */
 .avatar {
     display: inline-block;
