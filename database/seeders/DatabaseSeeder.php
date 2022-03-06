@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // 作成したSeederクラスを呼び出す この記述がないと、php artisan db:seed しても意味なし。
+        $this->call(CategorySeeder::class);
     }
 }

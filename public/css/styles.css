@@ -1,0 +1,116 @@
+@charset "UTF-8";
+
+/* ナビゲーションバー */
+.navbar {
+    background-color: rgb(253, 250, 247);
+    opacity: 0.9;
+}
+
+/* ナビゲーションバーと重なる部分をpaddingで空ける */
+body {
+    padding-top: 5rem;
+}
+
+/* カルーセル */
+.carousel-inner {
+    max-height: 300px;
+}
+
+/* メインコンテンツ */
+h2 {
+    font-size: 1.2rem;
+    color: #555555;
+    padding-bottom: 0.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+    border-bottom: solid 1.5px #666666;
+}
+
+.margin-left-auto {
+    margin-left: auto;
+}
+
+.list-group-item {
+    border: dashed 1px #777777;
+}
+.list-group > li:first-child {
+    border-top: none;
+}
+.list-group > li:last-child {
+    border-bottom: none;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* 画像サイズをボックスの大きさに合わせて拡大・縮小させる */
+.home_post {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+/* フッター */
+.footer {
+    background-color: rgb(253, 245, 247);
+    opacity: 0.9;
+}
+
+/* アバター */
+.avatar {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.avatar.comment {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+}
+
+.avatar > img {
+    display: block;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translateY(-50%);
+    object-fit: cover;
+}
+
+
+/* いいねボタン */
+.like_toggle {
+    color: gray;
+    margin-left: 10px;
+}
+.liked {
+    color: pink;
+}
+
+/* フォローボタン */
+.follow_toggle {
+    color:rgb(102, 102, 102);
+    background-color: rgb(255, 242, 230);
+    border:1px solid rgb(150, 150, 150); 
+    margin-left: 10px;
+    outline: none;
+}
+
+.followed {
+    color:rgb(99, 99, 99);
+    background-color:rgba(199, 198, 255, 0.521);
+    border:1px solid rgba(151, 149, 240, 0.801);
+}
+
+button.btn.cursor-pointer.follow_toggle.btn:focus {
+    box-shadow: none !important;
+}
