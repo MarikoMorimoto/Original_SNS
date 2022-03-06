@@ -5,38 +5,52 @@
     <div class="row justify-content-center">
         <div class="col-md-11 col-lg-8">
             <h2>お問い合わせ</h2>
-            {{-- エラーメッセージを出力 --}}
-            @foreach($errors->all() as $error)
-                <p class="error text-danger">{{ $error }}</p>
-            @endforeach
 
             <form class="mt-3" method="POST" action="{{ route('contact.confirm') }}">
                 @csrf
                 <div class="form-group form-row">
                     <label for="email" class="col-md-3 col-form-label">メールアドレス</label>
                     <div class="col-md-9">
-                        <input class="form-control" id="email" type="email" name="email" placeholder="メールアドレスを入力してください" value="{{ old('email') }}">
+                        <input class="form-control @error('email') is-invalid @enderror" id="email" type="email" name="email" placeholder="メールアドレスを入力してください" value="{{ old('email') }}">
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
                     </div>
                 </div>
                 <div class="form-group form-row">
                     <label for="title" class="col-md-3 col-form-label">タイトル</label>
                     <div class="col-md-9">
-                        <input class="form-control count_title" id="title" type="text" name="title" placeholder="タイトルを入力してください" value="{{ old('title') }}">
+                        <input class="form-control count_title @error('title') is-invalid @enderror" id="title" type="text" name="title" placeholder="タイトルを入力してください" value="{{ old('title') }}">
                         <div>
                             <span class="now_count_title">0</span> / 30 文字
                         </div>
                         <span class="over_count_title"></span>
+                        @error('title')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
                     </div>
                 </div>
                 
                 <div class="form-group form-row">
                     <label for="contact" class="col-md-3 col-form-label">お問い合わせ内容</label>
                     <div class="col-md-9">
-                        <textarea class="form-control count_comment" id="contact" name="contact" placeholder="お問い合わせ内容を入力してください" rows="10">{{ old('contact') }}</textarea>
+                        <textarea class="form-control count_comment @error('contact') is-invalid @enderror" id="contact" name="contact" placeholder="お問い合わせ内容を入力してください" rows="10">{{ old('contact') }}</textarea>
                         <div>
                             <span class="now_count_comment">0</span> / 1000 文字
                         </div>
                         <span class="over_count_comment"></span>
+                        @error('contact')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
                     </div>
                 </div>
                 
