@@ -29,7 +29,7 @@ class PostsController extends Controller
         // dd($keyword);
         // dd(Post::query()); // Illuminate\Database\Eloquent\Builder
         // dd(DB::table('posts')); // Illuminate\Database\Query\Builder
-        $query = Post::withCount('likes');
+        $query = Post::query();
         // dd($query->category); // posts テーブルにcategory カラムは無い。当該カラムはcategoriesテーブルにある。
         
         // dd(DB::table('posts')->rightJoin('categories', 'posts.category_id', '=', 'categories.id')
@@ -59,6 +59,7 @@ class PostsController extends Controller
                 ->where('title', 'like', '%'.$keyword.'%')
                 ->orWhere('comment', 'like', '%'.$keyword.'%')
                 ->orWhere('name', 'like', '%'.$keyword.'%')
+                ->withCount('likes')
                 ->orderByDesc('posts.created_at')->paginate(5);
 
             // 下記の方法でもできる 
@@ -72,7 +73,7 @@ class PostsController extends Controller
             //     ->latest()->paginate(5);
 
         } else {
-            $posts = $query->latest()->paginate(5);
+            $posts = $query->withCount('likes')->latest()->paginate(5);
         }
 
         // dd($posts);
