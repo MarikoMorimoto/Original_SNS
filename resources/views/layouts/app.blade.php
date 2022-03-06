@@ -122,7 +122,7 @@
             <li class="p-2"><a href="{{ route('contact.index') }}" class="text-secondary">お問い合わせ</a></li>
         </ul>
         <div class="pb-5">
-            <small class="">Copyright&copy; 2022 Flowers All Rights Reserved.</small>
+            <small>Copyright&copy; 2022 Flowers All Rights Reserved.</small>
         </div>
     </div>
 </body>
