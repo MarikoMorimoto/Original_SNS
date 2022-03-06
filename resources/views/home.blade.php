@@ -53,7 +53,7 @@
 @endif
 <!-- 検索フォーム -->
 <section class="container">
-    <form action="{{ route('posts.index') }}" class="form-inline my-3 justify-content-lg-left justify-content-center">
+    <form action="{{ route('posts.index') }}" class="form-inline mt-3 justify-content-lg-left justify-content-center">
         <div class="row form-group w-100">
             <label class="sr-only" for="keyword">検索キーワード</label>
             <input type="search" name="keyword" value="{{ request('keyword') }}" class="form-control col-lg-5 col-9" placeholder="地名・花の名前など">
