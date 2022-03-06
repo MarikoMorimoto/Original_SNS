@@ -15,7 +15,7 @@ class LikeController extends Controller
 
     public function index(){
         $user = \Auth::user();
-        $posts = $user->likePosts()->paginate(5);
+        $posts = $user->likePosts()->withCount('likes')->paginate(5);
         return view('likes.index', [
             'posts' => $posts,
         ]);
@@ -34,5 +34,11 @@ class LikeController extends Controller
                 'post_id' => $post->id,
             ]);
         };
+        // 最新の総いいね数を取得 loadCount でリレーションの数をxx_count という形で取得できる
+        $post_likes_count = $post->loadCount('likes')->likes_count;
+        $param = [
+            'post_likes_count' => $post_likes_count,
+        ];
+        return response()->json($param);
     }
 }

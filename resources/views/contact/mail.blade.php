@@ -17,5 +17,6 @@
 <br>
 <br>
 *********<br>
+<br>
 Flowers<br>
-アドレス
+info@flowers-share.com
