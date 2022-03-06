@@ -88,6 +88,10 @@ h2 {
 
 
 /* いいねボタン */
+.far.fa-heart.fa-2x.text-secondary {
+    margin-left: 10px;
+}
+
 .like_toggle {
     color: gray;
     margin-left: 10px;
