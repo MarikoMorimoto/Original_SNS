@@ -72,7 +72,7 @@ class UserController extends Controller
     }
 
     public function posts($id){
-        $posts = Post::where('user_id', $id)->latest()->paginate(5);
+        $posts = Post::withCount('likes')->where('user_id', $id)->latest()->paginate(5);
         // dd(Post::find($id)->get()); NG すべてのid の posts が取得される
         $user_name = User::find($id)->name;
         return view('users.posts', [

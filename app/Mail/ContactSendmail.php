@@ -35,7 +35,7 @@ class ContactSendmail extends Mailable
     public function build()
     {
         return $this
-        ->from('auth@morimori02.conohawing.com')
+        ->from('info@flowers-share.com')
         ->subject('お問い合わせありがとうございます')
         // view にメールの内容を記載
         ->view('contact.mail')

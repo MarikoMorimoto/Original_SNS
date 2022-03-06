@@ -38,10 +38,16 @@
                             @auth
                                 @if ($post->isLikedBy($user))
                                     いいね!!<i class="fas fa-heart fa-2x like_toggle liked cursor-pointer" data-id="{{ $post->id }}"></i>
+                                    <span class="like-counter text-secondary font-weight-bold"> {{ $post->likes_count }}</span>
                                 @else
                                     いいね!!<i class="far fa-heart fa-2x like_toggle cursor-pointer" data-id="{{ $post->id }}"></i>
+                                    <span class="like-counter text-secondary font-weight-bold"> {{ $post->likes_count }}</span>
                                 @endif
+                            @else
+                                いいね!!<i class="far fa-heart fa-2x text-secondary" data-toggle="tooltip" title="ログインすると押せるようになります"></i>
+                                <span class="like-counter text-secondary font-weight-bold"> {{ $post->likes_count }}</span>
                             @endauth
+                            
                         </div>
                         <div class="py-2 text-right">
                             {{ $post->created_at }}
@@ -74,6 +80,7 @@
     </div>
 </div>
 <script>
+    // いいねボタン
     $('.like_toggle').on('click', function(){
         let clicked_like = $(this);
         let liked_post_id = $(clicked_like).data('id');
@@ -86,9 +93,11 @@
             data: {
                 'post_id': liked_post_id
             },
-        }).done(function(){
+        }).done(function(data){
+            console.log(data);
             // toggleClass() 対象となる要素のclass属性の追加・削除を繰り返すことができる
             $(clicked_like).toggleClass('liked far fas');
+            $(clicked_like).next('.like-counter').text(data.post_likes_count);
         }).fail(function(){
             alert('いいねボタンにエラーが発生しました。画面を更新してください。')
         });
