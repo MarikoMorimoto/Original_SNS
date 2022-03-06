@@ -174,7 +174,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\ViewComposerserviceProvider::class, // 追記
+        // App\Providers\ViewComposerserviceProvider::class, // 追記
 
     ],
 
