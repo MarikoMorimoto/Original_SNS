@@ -76,7 +76,11 @@
                     </div>
                     <div class="col-12 py-2 text-right py-3">
                         カテゴリー : {{ $post->category->name}}<br>
-                        {{ $post->created_at }}
+                        {{ $post->created_at }}<br>
+                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Flowers | 素敵な花の写真をシェア！" data-hashtags="Flowers" data-show-count="false">Tweet</a>
+                        <div class="line-it-button" data-lang="ja" data-type="share-a" data-env="REAL" data-color="default" data-size="small" data-count="false" data-ver="3" style="display: none;"></div>
+
+                        
                         @auth
                             @if ($post->user->id === $user->id)
                                 <form action="{{ route('posts.edit', $post) }}">
@@ -195,6 +199,13 @@
     </div>
 </div>
 <script>
+    // LINE共有ボタンに現在開いているページのURLを取得して上書き
+    // $(document).ready(function(){~}) ページ全体が読み込まれたらreadyのfunction内の処理を行う
+    $(document).ready(function(){
+        let now_url = location.href
+        $('.line-it-button').data('url', now_url);
+    });
+
     // 削除ボタンがクリックされたとき、ダイアログを表示
     $('.delete').on('click', function(){
         // confirmメソッド ダイアログに表示するメッセージを指定することができる
