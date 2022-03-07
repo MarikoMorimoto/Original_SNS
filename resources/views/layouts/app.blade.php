@@ -18,6 +18,13 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}" defer></script>
 
+    <!-- Twitter share -->
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+    <!-- LINE share -->
+    <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -120,6 +127,10 @@
             <li class="p-2"><a href="{{ route('about.rule') }}" class="text-secondary">利用規約</a></li>
             <li class="p-2"><a href="{{ route('about.privacy') }}" class="text-secondary">プライバシーポリシー</a></li>
             <li class="p-2"><a href="{{ route('contact.index') }}" class="text-secondary">お問い合わせ</a></li>
+            <li class="p-2">
+                <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Flowers | 素敵な花の写真をシェアしませんか？" data-url="https://flowers-share.com/" data-hashtags="Flowers" data-show-count="false">Tweet</a>
+                <div class="line-it-button" data-lang="ja" data-type="share-a" data-env="REAL" data-url="https://flowers-share.com/" data-color="default" data-size="small" data-count="false" data-ver="3" style="display: none;"></div>
+                </li>
         </ul>
         <div class="pb-5">
             <small>Copyright&copy; 2022 Flowers All Rights Reserved.</small>
