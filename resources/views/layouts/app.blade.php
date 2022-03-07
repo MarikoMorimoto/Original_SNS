@@ -4,6 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- サイト説明文 -->
+    <meta name="description" content="花の投稿に特化したSNSです。
+    当サイトを通じて花の画像を見ることで、癒されたり幸せな気持ちになってほしいです。
+    皆さんそれぞれの視点で撮影した花の画像を、当サイトでシェアしていただけませんか？">
+
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
