@@ -34,12 +34,13 @@ class FollowController extends Controller
             // ->paginate(5);
 
         // Post:: から書き始めなければPost モデル内で定義したメソッドが使えない
-        $follow_users_posts = Post::withCount('likes')
+        $follow_users_posts = Post::query()
             ->join('follows', 'posts.user_id', '=', 'follows.follow_id')
             // テーブルに同名カラム（id created_at など）があるとview側で処理ができない場合もあるため絞り込む
             ->select('posts.*', 'follows.user_id', 'follows.follow_id')
             ->where('follows.user_id', $user->id)
             ->orderByDesc('posts.created_at')
+            ->withCount('likes')
             ->paginate(5);
         // dd($follow_users_posts);
 
