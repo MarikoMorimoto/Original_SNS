@@ -80,9 +80,9 @@ Route::get('/posts/search', [PostsController::class, 'search'])->name('posts.sea
 // ↑と思っていたが、バリデーションエラー時の処理は、「ひとつ前のURLに G E T で リダイレクト」！！
 // そのためバリデーションエラーが発生する可能性がある編集ページなどはGETで作成する必要がある
 
-Route::get('/posts/edit_image/{id}', [PostsController::class, 'editImage'])->name('posts.edit_image');
+Route::get('/posts/{id}/edit_image', [PostsController::class, 'editImage'])->name('posts.edit_image');
 
-Route::patch('/posts/edit_image/{id}', [PostsController::class, 'updateImage'])->name('posts.update_image');
+Route::patch('/posts/{id}/edit_image', [PostsController::class, 'updateImage'])->name('posts.update_image');
 
 Route::get('/posts/warning', [PostsController::class, 'warning'])->name('posts.warning');
 
@@ -102,7 +102,7 @@ Route::resource('comments', CommentController::class)->only([
 Route::post('/comments/{id}', [CommentController::class, 'addComment'])->name('comments.add');
 
 
-Route::get('/users/posts/{id}', [UserController::class, 'posts'])->name('users.posts');
+Route::get('/users/{id}/posts', [UserController::class, 'posts'])->name('users.posts');
 
 Route::get('/users/edit', [UserController::class, 'edit'])->name('users.edit');
 
