@@ -15,7 +15,7 @@
                 @csrf
                 <div class="form-group form-row">
                     {{-- 選択した画像のプレビュー表示 --}}
-                    <img class="preview img-fluid">
+                    <img class="preview img-fluid image-preview-max-height">
                     
                     <span class="pl-1 mt-2">
                         <input type="file" name="image" class="form-control-file" value="{{ old('image') }}">

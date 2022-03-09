@@ -22,9 +22,9 @@
                 <div class="form-group form-row justify-content-center">
                     {{-- 選択した画像のプレビュー表示 --}}
                     @if ($user->image !== '')
-                        <img class="preview img-fluid col-9 col-md-7" src="{{ \Storage::url($user->image) }}">
+                        <img class="preview img-fluid col-9 col-md-7 image-preview-max-height" src="{{ \Storage::url($user->image) }}">
                     @else
-                        <img class="preview img-fluid col-9 col-md-7" src="{{ asset('images/profile_icon.png') }}">
+                        <img class="preview img-fluid col-9 col-md-7 image-preview-max-height" src="{{ asset('images/profile_icon.png') }}">
                     @endif
                     <span class="pl-1 m-4">
                         <input type="file" name="image" class="form-control-file">

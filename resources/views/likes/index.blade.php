@@ -11,11 +11,11 @@
                     <div class="col-md-6 mt-3">
                         @if ($post->image !== '')
                         <a href="{{ route('posts.show', $post) }}">
-                            <img class="img-fluid" src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
+                            <img class="img-fluid image-preview-max-height" src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
                         </a>
                         @else
                         <a href="{{ route('posts.show', $post) }}">
-                            <img class="img-fluid" src="{{ asset('images/no_image.png') }}" alt="no_image">
+                            <img class="img-fluid image-preview-max-height" src="{{ asset('images/no_image.png') }}" alt="no_image">
                         </a>
                         @endif
                     </div>

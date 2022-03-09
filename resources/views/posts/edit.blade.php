@@ -9,9 +9,9 @@
             <div class="row justify-content-center mt-4">
                 <div class="col-12 text-center">
                     @if ($post->image !== '')
-                        <img class="img-fluid" src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
+                        <img class="img-fluid image-preview-max-height" src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
                     @else
-                        <img class="img-fluid" src="{{ asset('images/no_image.png') }}" alt="no_image">
+                        <img class="img-fluid image-preview-max-height" src="{{ asset('images/no_image.png') }}" alt="no_image">
                     @endif        
                     <form class="mt-2 text-right" action="{{ route('posts.edit_image', $post) }}">
                         <input type="submit" class="btn btn-light btn-outline-secondary" value="画像を変更する"> 
