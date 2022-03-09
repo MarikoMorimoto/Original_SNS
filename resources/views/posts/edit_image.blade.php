@@ -22,9 +22,9 @@
                 <div class="form-group form-row justify-content-center">
                     {{-- 選択した画像のプレビュー表示 --}}
                     @if ($post->image !== '')
-                        <img class="preview img-fluid" src="{{ asset('storage/' . $post->image) }}" alt="previw">
+                        <img class="preview img-fluid image-preview-max-height" src="{{ asset('storage/' . $post->image) }}" alt="previw">
                     @else
-                        <img class="preview img-fluid" src="{{ asset('images/no_image.png') }}" alt="preview">
+                        <img class="preview img-fluid image-preview-max-height" src="{{ asset('images/no_image.png') }}" alt="preview">
                     @endif                            
                     <span class="pl-1 mt-2">
                         <input type="file" name="image" class="form-control-file">
