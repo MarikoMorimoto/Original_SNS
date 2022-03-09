@@ -44,6 +44,16 @@ h2 {
     cursor: pointer;
 }
 
+/* 投稿詳細ページで画像の全容（縦幅）がスクロール無しで見えるように設定 */
+.image-max-height {
+    max-height: 500px;
+}
+
+/* 投稿詳細ページ以外での画像サイズの制限 */
+.image-preview-max-height {
+    max-height: 300px;
+}
+
 /* 画像サイズをボックスの大きさに合わせて拡大・縮小させる */
 .home_post {
     width: 100%;

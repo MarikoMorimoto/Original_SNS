@@ -7,9 +7,9 @@
             <h2>{{ $show_user->name }} さん のプロフィール</h2>
             <div class="row justify-content-center">
                 @if ($show_user->image !== '')
-                    <img class="img-fluid col-9 col-md-7 mt-3" src="{{ \Storage::url($show_user->image) }}">
+                    <img class="img-fluid col-9 col-md-7 mt-3 image-preview-max-height" src="{{ \Storage::url($show_user->image) }}">
                 @else
-                    <img class="img-fluid col-9 col-md-7 mt-3" src="{{ asset('images/profile_icon.png') }}">
+                    <img class="img-fluid col-9 col-md-7 mt-3 image-preview-max-height" src="{{ asset('images/profile_icon.png') }}">
                 @endif
             </div>
             <div class="border-bottom p-2 mt-3 d-flex">

@@ -26,9 +26,9 @@
             <div class="row justify-content-center mt-4">
                 <div class="col-12 text-center">
                     @if ($post->image !== '')
-                    <img class="img-fluid" src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
+                    <img class="img-fluid image-max-height" src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
                     @else
-                    <img class="img-fluid" src="{{ asset('images/no_image.png') }}" alt="no_image">
+                    <img class="img-fluid image-max-height" src="{{ asset('images/no_image.png') }}" alt="no_image">
                     @endif
                 </div>
             </div>
