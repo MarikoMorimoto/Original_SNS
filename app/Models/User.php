@@ -97,4 +97,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $result;
     }
 
+    // 引数で指定された画像のサムネイル画像のパスを返す
+    public function thumbnail($path){
+        $thumbnail_path = str_replace('photos/', 'thumbnail-', $path);
+        $result_path = 'photos/' . $thumbnail_path;
+        return $result_path;
+    }
+
 }

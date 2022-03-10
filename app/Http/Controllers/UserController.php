@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserImageRequest;
 use App\Services\FileUploadService;
+use Image;
 
 class UserController extends Controller
 {
@@ -64,6 +65,21 @@ class UserController extends Controller
     public function updateImage(UserImageRequest $request, FileUploadService $service){
         $user = \Auth::user();
         $path = $service->saveImage($request->file('image'));
+
+        $storage_path = public_path('storage/');
+        // （完全修飾パス）/public/storage/
+
+        $thumbnail = Image::make($storage_path . $path);
+
+        // $path は photos/（文字列）のため、「photos/」を「thumbnail-」に置き換え
+        $thumbnail_path = str_replace('photos/', 'thumbnail-', $path);
+
+        // 画像をリサイズ 幅だけを設定して、高さは自動処理
+        $thumbnail->resize(100, null, function ($constraint) {
+            $constraint->aspectRatio();
+        // 元のファイル名の先頭に「thumbnail-」を付け加えたものを保存
+        })->save($storage_path . 'photos/' . $thumbnail_path);
+
         $user->update([
             'image' => $path,
         ]);

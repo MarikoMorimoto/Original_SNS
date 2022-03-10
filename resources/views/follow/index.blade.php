@@ -11,7 +11,7 @@
                     <div class="col-12 text-left d-flex mt-3">
                         <div class="avatar align-self-center">
                             @if ($follow_user->image !== '')
-                                <img src="{{ \Storage::url($follow_user->image) }}" alt="avatar">
+                                <img src="{{ \Storage::url($follow_user->thumbnail($follow_user->image)) }}" alt="avatar">
                             @else
                                 <img src="{{ asset('images/profile_icon.png') }}" alt="avatar">
                             @endif

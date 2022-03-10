@@ -92,7 +92,7 @@
                     <div class="col-12 text-left d-flex">
                         <div class="avatar align-self-center">
                             @if ($post->user->image !== '')
-                                <img src="{{ \Storage::url($post->user->image) }}" alt="avatar">
+                                <img src="{{ \Storage::url($post->user->thumbnail($post->user->image)) }}" alt="avatar">
                             @else
                                 <img src="{{ asset('images/profile_icon.png') }}" alt="avatar">
                             @endif
@@ -150,7 +150,7 @@
                                     <div class="border-bottom pb-2 mb-2 d-flex">
                                         <div class="avatar comment align-self-center">
                                             @if ($comment->user->image !== '')
-                                                <img src="{{ \Storage::url($comment->user->image) }}" alt="avatar">
+                                                <img src="{{ \Storage::url($comment->user->thumbnail($comment->user->image)) }}" alt="avatar">
                                             @else
                                                 <img src="{{ asset('images/profile_icon.png') }}" alt="avatar">
                                             @endif
