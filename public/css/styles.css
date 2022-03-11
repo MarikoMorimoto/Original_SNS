@@ -47,11 +47,15 @@ h2 {
 /* 投稿詳細ページで画像の全容（縦幅）がスクロール無しで見えるように設定 */
 .image-max-height {
     max-height: 500px;
+    width: auto;
 }
 
 /* 投稿詳細ページ以外での画像サイズの制限 */
+
 .image-preview-max-height {
+    /* object-fit: cover; */
     max-height: 300px;
+    width: auto;
 }
 
 /* 画像サイズをボックスの大きさに合わせて拡大・縮小させる */
