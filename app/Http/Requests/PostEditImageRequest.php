@@ -31,7 +31,7 @@ class PostEditImageRequest extends FormRequest
                 'mimes:jpeg,jpg,png',
                 'dimensions:min_width=100,min_height=100,max_width=10000,max_height=10000',
             ],
-            'file' => ['max:50000'], // ファイルサイズ 最大50MB
+            'file' => ['max:2000'], // ファイルサイズ 最大2MB
         ];
     }
 }

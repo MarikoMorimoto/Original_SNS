@@ -11,7 +11,7 @@
                     <div class="col-md-6 mt-3">
                         @if ($post->image !== '')
                         <a href="{{ route('posts.show', $post) }}">
-                            <img class="img-fluid image-max-height" src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
+                            <img class="img-fluid image-max-height" src="{{ asset('storage/' . $post->thumbnail($post->image)) }}" alt="{{ $post->title }}">
                         </a>
                         @else
                         <a href="{{ route('posts.show', $post) }}">

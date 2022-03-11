@@ -18,7 +18,7 @@
                     <img class="preview img-fluid image-preview-max-height">
                     
                     <span class="pl-1 mt-2">
-                        <input type="file" name="image" class="form-control-file" value="{{ old('image') }}">
+                        <input type="file" name="image" class="form-control-file">
                     </span>
                     
                 </div>

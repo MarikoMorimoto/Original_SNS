@@ -13,6 +13,8 @@ use App\Models\User;
 use App\Services\FileUploadService;
 use App\Http\Requests\PostEditRequest;
 use App\Http\Requests\PostEditImageRequest;
+use Image; // intervention/image ライブラリの読み込み
+
 
 class PostsController extends Controller
 {
@@ -93,6 +95,25 @@ class PostsController extends Controller
     public function store(PostRequest $request, FileUploadService $service)
     {
         $path = $service->saveImage($request->file('image'));
+
+        // サムネイル用画像を作成して保存するための処理
+        // サムネイル用画像を保存するためのパス
+        // public_path() publicディレクトリへの完全修飾パスを返す パラメタ指定しない場合、末尾にスラッシュは付与されない
+        // パラメタ指定するとpublicディレクトリへの完全修飾パスに続いて指定した文字列を繋げたパスを返す
+        $storage_path = public_path('storage/');
+        // （完全修飾パス）/public/storage/
+
+        $thumbnail = Image::make($storage_path . $path);
+
+        // $path は photos/（文字列）のため、「photos/」を「thumbnail-」に置き換え
+        $thumbnail_path = str_replace('photos/', 'thumbnail-', $path);
+
+        // 画像をリサイズ 幅だけを設定して、高さは自動処理
+        $thumbnail->resize(500, null, function ($constraint) {
+            $constraint->aspectRatio();
+        // 元のファイル名の先頭に「thumbnail-」を付け加えたものを保存
+        })->save($storage_path . 'photos/' . $thumbnail_path);
+
 
         Post::create([
             'user_id' => \Auth::user()->id,

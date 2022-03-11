@@ -94,7 +94,7 @@
                     <div class="col-md-4 col-6 mb-3">
                         @if ($post->image !== '')
                             <a href="{{ route('posts.show', $post) }}">
-                                <img class="home_post" src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
+                                <img class="home_post" src="{{ asset('storage/' . $post->thumbnail($post->image)) }}" alt="{{ $post->title }}">
                             </a>
                         @else
                             <a href="{{ route('posts.show', $post) }}">
@@ -121,7 +121,7 @@
                         <div class="col-md-4 col-6 mb-3">
                             @if ($follow_users_post->image !== '')
                                 <a href="{{ route('posts.show', $follow_users_post) }}">
-                                    <img class="home_post" src="{{ asset('storage/' . $follow_users_post->image) }}" alt="{{ $follow_users_post->title }}">
+                                    <img class="home_post" src="{{ asset('storage/' . $follow_users_post->thumbnail($follow_users_post->image)) }}" alt="{{ $follow_users_post->title }}">
                                 </a>
                             @else
                                 <a href="{{ route('posts.show', $follow_users_post) }}">
