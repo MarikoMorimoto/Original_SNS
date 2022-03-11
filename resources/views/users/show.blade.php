@@ -5,11 +5,11 @@
     <div class="row justify-content-center">
         <div class="col-md-11 col-lg-8">
             <h2>{{ $show_user->name }} さん のプロフィール</h2>
-            <div class="row justify-content-center">
+            <div class="text-center mt-3">
                 @if ($show_user->image !== '')
-                    <img class="img-fluid col-9 col-md-7 mt-3 image-preview-max-height" src="{{ \Storage::url($show_user->image) }}">
+                    <img class="img-fluid image-preview-max-height" src="{{ \Storage::url($show_user->image) }}">
                 @else
-                    <img class="img-fluid col-9 col-md-7 mt-3 image-preview-max-height" src="{{ asset('images/profile_icon.png') }}">
+                    <img class="img-fluid image-preview-max-height" src="{{ asset('images/profile_icon.png') }}">
                 @endif
             </div>
             <div class="border-bottom p-2 mt-3 d-flex">
@@ -54,11 +54,11 @@
                     <div class="col-md-6 mt-3">
                         @if ($post->image !== '')
                         <a href="{{ route('posts.show', $post) }}">
-                            <img class="img-fluid" src="{{ asset('storage/' . $post->thumbnail($post->image)) }}" alt="{{ $post->title }}">
+                            <img class="img-fluid image-preview-max-height" src="{{ asset('storage/' . $post->thumbnail($post->image)) }}" alt="{{ $post->title }}">
                         </a>
                         @else
                         <a href="{{ route('posts.show', $post) }}">
-                            <img class="img-fluid" src="{{ asset('images/no_image.png') }}" alt="no_image">
+                            <img class="img-fluid image-preview-max-height" src="{{ asset('images/no_image.png') }}" alt="no_image">
                         </a>
                         @endif
                     </div>

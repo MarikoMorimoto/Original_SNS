@@ -22,11 +22,11 @@
                 </div>
             </div>
             @endif
-            <div class="row justify-content-center">
+            <div class="text-center mt-3">
                 @if ($user->image !== '')
-                    <img class="img-fluid col-9 col-md-7 mt-3 image-preview-max-height" src="{{ \Storage::url($user->image) }}">
+                    <img class="img-fluid image-preview-max-height" src="{{ \Storage::url($user->image) }}">
                 @else
-                    <img class="img-fluid col-9 col-md-7 mt-3 image-preview-max-height" src="{{ asset('images/profile_icon.png') }}">
+                    <img class="img-fluid image-preview-max-height" src="{{ asset('images/profile_icon.png') }}">
                 @endif
             </div>
             <form class="mt-3" action="{{ route('users.edit_image') }}">
