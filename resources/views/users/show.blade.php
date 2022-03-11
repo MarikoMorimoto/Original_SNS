@@ -71,9 +71,33 @@
                             @auth
                                 @if ($post->isLikedBy($user))
                                     いいね!!<i class="fas fa-heart fa-2x like_toggle liked cursor-pointer" data-id="{{ $post->id }}"></i>
+                                    <span class="like-counter text-secondary font-weight-bold"> {{ $post->likes_count }}</span>
                                 @else
                                     いいね!!<i class="far fa-heart fa-2x like_toggle cursor-pointer" data-id="{{ $post->id }}"></i>
+                                    <span class="like-counter text-secondary font-weight-bold"> {{ $post->likes_count }}</span>
                                 @endif
+                            @else
+                                いいね!!<i class="far fa-heart fa-2x text-secondary" data-toggle="modal" data-target="#modal"></i>
+                                <span class="like-counter text-secondary font-weight-bold"> {{ $post->likes_count }}</span>
+                                <!-- モーダル -->
+                                <div class="modal fade" id="modal">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <p class="modal-title">いいね!!ボタンについて</p>
+                                                <button type="button" class="close" data-dismiss="modal">
+                                                    <span aria-hidden="true">&#215;</span>
+                                                </button>
+                                            </div>
+                                                <div class="modal-body">
+                                                    <p class="text-left">
+                                                        ログインすると いいね!! が利用できるようになります。
+                                                    </p>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal">閉じる</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             @endauth
                         </div>
                         <div class="py-2 text-right">
