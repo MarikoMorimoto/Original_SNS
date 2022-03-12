@@ -74,4 +74,9 @@
         </div>
     </div>
 </div>
+<script>
+    $('form').submit(function(){
+        $('button[type="submit"]').prop('disabled', 'true');
+    });
+</script>
 @endsection
