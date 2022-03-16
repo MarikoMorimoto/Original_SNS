@@ -115,12 +115,18 @@ class PostsController extends Controller
         })->save($storage_path . 'photos/' . $thumbnail_path);
 
 
+        // 花の名前欄に入力がなければ「''」を保存
+        if (empty($request->flower_name)) {
+            $request->flower_name = '';
+        }
+
         Post::create([
             'user_id' => \Auth::user()->id,
             'title' => $request->title,
             'comment' => $request->comment,
             'category_id' => $request->category_id,
             'image' => $path, // ファイル名を保存
+            'flower_name' => $request->flower_name,
         ]);
         session()->flash('status', '投稿しました!');
         return redirect()->route('home');
