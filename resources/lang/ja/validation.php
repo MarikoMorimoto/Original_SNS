@@ -162,6 +162,7 @@ return [
         'contact' => 'お問い合わせ内容',
         'email' => 'メールアドレス',
         'password' => 'パスワード',
+        'flower_name' => '花の名前'
     ],
 
 ];
