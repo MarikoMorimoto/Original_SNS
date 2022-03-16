@@ -125,8 +125,8 @@
                             @endif
                         @endauth
                     </div>
-                    <div class="col-12 mt-3 text-right">
-                        <div class="d-flex justify-content-end">
+                    <div class="col-12 mt-5 text-left">
+                        <div class="d-flex">
                             <div>
                                 <i class="far fa-comment-dots fa-2x"></i>
                             </div>
@@ -144,7 +144,7 @@
                         @else
                             <form method="POST" action="{{ route('comments.add', $post) }}">
                                 @csrf
-                                <div class="form-group">
+                                <div class="form-group mt-1">
                                     <label for="comment">この投稿について感想など、コメントを追加しませんか？</label>
                                     <textarea class="form-control count_comment @error('comment') is-invalid @enderror" id="comment" name="comment" placeholder="コメントを入力してください" rows="2">{{ (old('comment')) }}</textarea>
                                     <div class="text-left">
@@ -157,7 +157,9 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <input class="submit btn btn-light btn-outline-secondary mb-1" type="submit" value="コメントを追加">
+                                <div class="text-right">
+                                    <input class="submit btn btn-light btn-outline-secondary mb-1" type="submit" value="コメントを追加">
+                                </div>
                             </form>
                         @endguest
 
