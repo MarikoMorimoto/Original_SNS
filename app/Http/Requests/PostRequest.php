@@ -28,6 +28,7 @@ class PostRequest extends FormRequest
             'comment' => ['required', 'max:150'],
             // 特定のテーブルのカラムを使用して存在チェック
             'category_id' => ['required', 'exists:categories,id'],
+            'flower_name' => ['max:20'],
             'image' => [
                 'required',
                 'file', // ファイルがアップロードされているか
