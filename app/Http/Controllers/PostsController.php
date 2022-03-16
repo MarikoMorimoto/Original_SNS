@@ -61,6 +61,7 @@ class PostsController extends Controller
                 ->where('title', 'like', '%'.$keyword.'%')
                 ->orWhere('comment', 'like', '%'.$keyword.'%')
                 ->orWhere('name', 'like', '%'.$keyword.'%')
+                ->orWhere('flower_name', 'like', '%'.$keyword.'%')
                 ->withCount('likes')
                 ->orderByDesc('posts.created_at')->paginate(5);
 
