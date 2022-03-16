@@ -26,6 +26,7 @@ class PostEditRequest extends FormRequest
         return [
             'title' => ['required', 'max:20'],
             'comment' => ['required', 'max:150'],
+            'flower_name' => ['max:20'],
             // 特定のテーブルのカラムを使用して存在チェック
             'category_id' => ['required', 'exists:categories,id'],
         ];

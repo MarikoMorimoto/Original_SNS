@@ -58,7 +58,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <p class="modal-title">いいね!!ボタンについて</p>
+                                                <p class="modal-title">いいね!! ボタンについて</p>
                                                 <button type="button" class="close" data-dismiss="modal">
                                                     <span aria-hidden="true">&#215;</span>
                                                 </button>
@@ -75,15 +75,27 @@
                             @endauth
                     </div>
                     <div class="col-12 py-2 text-right py-3">
-                        カテゴリー : {{ $post->category->name}}<br>
-                        {{ $post->created_at }}<br>
-                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Flowers | 素敵な花の写真をシェア！" data-hashtags="Flowers" data-show-count="false">Tweet</a>
-                        <div class="line-it-button" data-lang="ja" data-type="share-a" data-env="REAL" data-color="default" data-size="small" data-count="false" data-ver="3" style="display: none;"></div>
+                        <div>カテゴリー : {{ $post->category->name}}</div>
+                        <div class="mt-1">
+                            花の名前 : 
+                            @if ($post->flower_name !== '')
+                                {{ $post->flower_name }}
+                            @else
+                                未入力
+                            @endif
+                        </div>
+                        <div class="mt-1">
+                            {{ $post->created_at }}
+                        </div>
+                        <div class="mt-1">
+                            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Flowers | 素敵な花の写真をシェア！" data-hashtags="Flowers" data-show-count="false">Tweet</a>
+                            <div class="line-it-button" data-lang="ja" data-type="share-a" data-env="REAL" data-color="default" data-size="small" data-count="false" data-ver="3" style="display: none;"></div>
+                        </div>
 
                         
                         @auth
                             @if ($post->user->id === $user->id)
-                                <form action="{{ route('posts.edit', $post) }}">
+                                <form action="{{ route('posts.edit', $post) }}" class="mt-2">
                                     <input type="submit" class="btn btn-light btn-outline-secondary" value="投稿を編集"> 
                                 </form>
                             @endif
@@ -113,12 +125,18 @@
                             @endif
                         @endauth
                     </div>
-                    <div class="col-12 mt-3 text-right">
-                        <i class="far fa-comment-dots fa-2x"></i>
-                        <span>コメント</span>
+                    <div class="col-12 mt-5 text-left">
+                        <div class="d-flex">
+                            <div>
+                                <i class="far fa-comment-dots fa-2x"></i>
+                            </div>
+                            <div class="align-self-center">
+                                <span class="h5 ml-1">コメント</span>
+                            </div>
+                        </div>
                         @guest
                             <div>
-                                <span>ユーザー登録をするとコメントができるようになります!</span>
+                                <span>ログインをするとコメントができるようになります!</span>
                                 <div>
                                     <a class="btn btn-link" href="{{ route('register') }}">{{ 'ユーザー登録がお済みでない方はこちら' }}</a>
                                 </div>
@@ -126,10 +144,10 @@
                         @else
                             <form method="POST" action="{{ route('comments.add', $post) }}">
                                 @csrf
-                                <div class="form-group">
+                                <div class="form-group mt-1">
                                     <label for="comment">この投稿について感想など、コメントを追加しませんか？</label>
-                                    <textarea class="form-control count_comment @error('comment') is-invalid @enderror" id="comment" name="comment" placeholder="コメントを入力" rows="2">{{ (old('comment')) }}</textarea>
-                                    <div>
+                                    <textarea class="form-control count_comment @error('comment') is-invalid @enderror" id="comment" name="comment" placeholder="コメントを入力してください" rows="2">{{ (old('comment')) }}</textarea>
+                                    <div class="text-left">
                                         <span class="now_count_comment">0</span> / 150 文字
                                     </div>
                                     <span class="over_count_comment"></span>
@@ -138,9 +156,10 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-
                                 </div>
-                                <input class="submit btn btn-light btn-outline-secondary" type="submit" value="コメントを追加">
+                                <div class="text-right">
+                                    <input class="submit btn btn-light btn-outline-secondary mb-1" type="submit" value="コメントを追加">
+                                </div>
                             </form>
                         @endguest
 

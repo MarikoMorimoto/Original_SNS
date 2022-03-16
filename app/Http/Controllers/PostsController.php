@@ -61,6 +61,7 @@ class PostsController extends Controller
                 ->where('title', 'like', '%'.$keyword.'%')
                 ->orWhere('comment', 'like', '%'.$keyword.'%')
                 ->orWhere('name', 'like', '%'.$keyword.'%')
+                ->orWhere('flower_name', 'like', '%'.$keyword.'%')
                 ->withCount('likes')
                 ->orderByDesc('posts.created_at')->paginate(5);
 
@@ -115,12 +116,18 @@ class PostsController extends Controller
         })->save($storage_path . 'photos/' . $thumbnail_path);
 
 
+        // 花の名前欄に入力がなければ「''」を保存
+        if (empty($request->flower_name)) {
+            $request->flower_name = '';
+        }
+
         Post::create([
             'user_id' => \Auth::user()->id,
             'title' => $request->title,
             'comment' => $request->comment,
             'category_id' => $request->category_id,
             'image' => $path, // ファイル名を保存
+            'flower_name' => $request->flower_name,
         ]);
         session()->flash('status', '投稿しました!');
         return redirect()->route('home');
@@ -154,10 +161,17 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
         $comments = $post->commentsToPost()->orderBy('created_at', 'desc')->paginate(3);
+
+        // 花の名前欄に入力がなければ「''」を保存
+        if (empty($request->flower_name)) {
+            $request->flower_name = '';
+        }
+        
         $post->update([
             'title' => $request->title,
             'comment' => $request->comment,
-            'category_id' => $request->category_id
+            'category_id' => $request->category_id,
+            'flower_name' => $request->flower_name,
         ]);
         session()->flash('status', '投稿を編集しました!');
         return redirect()->route('posts.show', [

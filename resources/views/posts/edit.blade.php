@@ -5,6 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-11 col-lg-8">
             <h2>投稿編集</h2>
+            <p class="small text-secondary mt-2">
+                入力欄最下部の 花の名前 欄以外は入力必須項目です
+            </p>         
 
             <div class="row justify-content-center mt-4">
                 <div class="col-12 text-center">
@@ -56,7 +59,7 @@
                 
                 <div class="form-group form-row">
                     <label for="category" class="col-md-2 col-form-label">カテゴリー</label>
-                    <select id="category" class="col-md-6" name="category_id">
+                    <select id="category" class="col-md-6 mx-1" name="category_id">
                         @forelse ($categories as $category)
                             @if ($category->id === $post->category_id)
                                 <option value="{{ $category->id }}" selected>
@@ -81,6 +84,25 @@
                         </strong>
                     </div>
                 @endif
+
+                <div class="form-group form-row">
+                    <label for="flower_name" class="col-md-2 col-form-label">花の名前</label>
+                    <div class="col-md-10">
+                        <input class="form-control count_flower_name @error('flower_name') is-invalid @enderror" id="flower_name" type="text" name="flower_name" placeholder="花の名前を入力してください" value="{{ $post->flower_name }}">
+                        <div class="d-flex">
+                            <div class="now_count_flower_name mr-1">0</div>
+                            <div>/ 20文字</div>
+                            <div class="ml-auto small text-secondary align-self-center">こちらの 花の名前 欄は未入力でも更新できます</div>
+                        </div>
+                        <span class="over_count_flower_name"></span>
+                        @error('flower_name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
 
                 <div class="row mt-4">
                     <div class="col-12 text-right">
@@ -111,6 +133,27 @@
             return false;
         }
     });
+
+    $('.count_flower_name').on('input', function(){
+        // 文字数を取得
+        let count = $(this).val().length;
+        // 現在の文字数を表示
+        $('.now_count_flower_name').text(count);
+        if (count > 20) {
+            // 既定の文字数を超えたときはメッセージを表示
+            $('.now_count_flower_name').addClass('text-danger');
+            $('.over_count_flower_name').text('花の名前の入力は20文字以下にしてください').addClass('text-danger');
+            // 送信ボタンを無効化
+            $('.submit').prop('disabled', true);
+        } else {
+            // 既定の文字数以内のときはメッセージを表示しない
+            $('.now_count_flower_name').removeClass('text-danger');
+            $('.over_count_flower_name').empty();
+            // 送信ボタンを有効化
+            $('.submit').prop('disabled', false);
+        }
+    });
+
 
     $('.count_title').on('input', function(){
         // 文字数を取得

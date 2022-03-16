@@ -19,7 +19,8 @@ class Post extends Model
         'title',
         'comment',
         'category_id',
-        'image'
+        'image',
+        'flower_name',
     ];
 
     public function user(){
