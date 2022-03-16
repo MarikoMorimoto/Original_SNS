@@ -160,10 +160,17 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
         $comments = $post->commentsToPost()->orderBy('created_at', 'desc')->paginate(3);
+
+        // 花の名前欄に入力がなければ「''」を保存
+        if (empty($request->flower_name)) {
+            $request->flower_name = '';
+        }
+        
         $post->update([
             'title' => $request->title,
             'comment' => $request->comment,
-            'category_id' => $request->category_id
+            'category_id' => $request->category_id,
+            'flower_name' => $request->flower_name,
         ]);
         session()->flash('status', '投稿を編集しました!');
         return redirect()->route('posts.show', [
